@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elétricos no Brasil 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07090f;--s1:#0e1420;--s2:#131b2d;--bdr:#1a2540;--cyan:#00d4ff;--green:#00e87a;--amber:#ffb800;--red:#ff4d4d;--violet:#a855f7;--blue:#3b82f6;--white:#eef2ff;--muted:#4e6080;--r:10px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--white);font-family:'Space Grotesk',sans-serif;min-height:100vh;background-image:radial-gradient(ellipse 120% 40% at 50% 0%,rgba(0,212,255,.04) 0%,transparent 60%)}
+/* NAV */
+.nav{display:flex;background:var(--s1);border-bottom:1px solid var(--bdr);padding:0 1rem;position:sticky;top:0;z-index:100;overflow-x:auto;gap:1px}
+.tab{font-family:'Syne',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:.75rem .9rem;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap;flex-shrink:0}
+.tab:hover{color:var(--white)}.tab.active{color:var(--cyan);border-bottom-color:var(--cyan)}
+/* PAGE */
+.page{display:none;padding:1.6rem 1.2rem 4rem;max-width:1440px;margin:0 auto}.page.active{display:block}
+/* HEADER */
+.ph{margin-bottom:1.5rem}
+.eyebrow{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--cyan);background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.18);border-radius:20px;display:inline-block;padding:3px 11px;margin-bottom:.65rem}
+.ph h2{font-family:'Syne',sans-serif;font-size:clamp(1.4rem,3.5vw,2.1rem);font-weight:800;line-height:1.1;background:linear-gradient(135deg,#eef2ff 40%,var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.ph p{font-size:.72rem;color:var(--muted);margin-top:.35rem}
+/* STATS */
+.stats{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:1.5rem}
+.stat{background:var(--s1);border:1px solid var(--bdr);border-radius:8px;padding:.45rem .85rem;text-align:center}
+.sn{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:700;color:var(--cyan)}.sl{font-size:.56rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em}
+/* BRAND SECTION */
+.brand-sec{margin-bottom:2.5rem}
+.brand-hdr{display:flex;align-items:center;gap:.75rem;margin-bottom:.9rem;padding-bottom:.7rem;border-bottom:1px solid var(--bdr)}
+.brand-flag{font-size:1.4rem;line-height:1}
+.brand-name{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;color:var(--white)}
+.brand-tag{font-size:.6rem;color:var(--muted);background:var(--s2);border:1px solid var(--bdr);border-radius:4px;padding:2px 8px;margin-left:auto}
+.brand-line{flex:1;height:1px;background:var(--bdr)}
+/* GRID */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:.7rem}
+.grid-5{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+/* CARD */
+.card{background:var(--s1);border:1px solid var(--bdr);border-radius:var(--r);padding:.9rem;position:relative;overflow:hidden;transition:border-color .18s,transform .18s;cursor:default}
+.card:before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--cc,var(--cyan));opacity:.45}
+.card:hover{border-color:var(--cc,var(--cyan));transform:translateY(-2px)}.card:hover:before{opacity:1}
+/* badges */
+.bdg{position:absolute;top:.6rem;right:.6rem;font-size:.54rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-radius:4px;padding:2px 6px}
+.bdg-g{background:var(--amber);color:#000}
+.bdg-v{background:var(--violet);color:#fff}
+.bdg-n{background:var(--green);color:#000}
+/* card content */
+.ct{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.6rem}
+.cb{font-size:.53rem;color:var(--muted);text-transform:uppercase;letter-spacing:.12em;margin-bottom:2px}
+.cm{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;line-height:1.2;padding-right:3rem}
+.ty{font-size:.53rem;text-transform:uppercase;letter-spacing:.06em;border:1px solid var(--cc,var(--cyan));color:var(--cc,var(--cyan));border-radius:4px;padding:2px 6px;white-space:nowrap;flex-shrink:0}
+.cp{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700;color:var(--green);margin-bottom:.7rem}
+.cp small{font-family:'Space Grotesk',sans-serif;font-size:.57rem;color:var(--muted);font-weight:400;display:block;margin-top:1px}
+/* bar */
+.br{display:flex;align-items:center;gap:5px;margin-bottom:3px}
+.bl{font-size:.53rem;color:var(--muted);width:34px;flex-shrink:0}
+.bb{flex:1;height:4px;background:var(--bdr);border-radius:3px;overflow:hidden}
+.bf{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--cc,var(--cyan)),rgba(0,212,255,.2))}
+.bk{font-size:.6rem;width:45px;text-align:right;flex-shrink:0}
+/* specs */
+.sp{display:grid;grid-template-columns:1fr 1fr;gap:.32rem;margin:.65rem 0}
+.sv{background:var(--s2);border:1px solid var(--bdr);border-radius:6px;padding:.35rem .5rem}
+.sl2{font-size:.5rem;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:1px}
+.sv2{font-size:.68rem;font-weight:500}
+.g{color:var(--green)}.a{color:var(--amber)}.r{color:var(--red)}.c{color:var(--cyan)}.v{color:var(--violet)}
+/* foot */
+.ft{display:flex;align-items:center;justify-content:space-between;padding-top:.6rem;border-top:1px solid var(--bdr);font-size:.6rem}
+.dot{width:6px;height:6px;border-radius:50%;display:inline-block;margin-right:4px}
+.dg{background:var(--green);box-shadow:0 0 4px var(--green)}.da{background:var(--amber)}.dr{background:var(--red)}
+.vs{font-size:.55rem;color:var(--muted);background:var(--s2);border:1px solid var(--bdr);border-radius:4px;padding:2px 6px;font-style:italic}
+/* compact card for premium/imported */
+.ccard{background:var(--s1);border:1px solid var(--bdr);border-radius:var(--r);padding:.8rem;transition:border-color .18s}
+.ccard:hover{border-color:var(--cc,var(--cyan))}
+.cc-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem}
+.cc-model{font-family:'Syne',sans-serif;font-size:.82rem;font-weight:700}
+.cc-price{font-size:.82rem;color:var(--green);font-weight:600}
+.cc-specs{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.35rem}
+.chip{font-size:.58rem;background:var(--s2);border:1px solid var(--bdr);border-radius:4px;padding:2px 7px;color:var(--muted)}
+.chip.g{color:var(--green);border-color:rgba(0,232,122,.3)}
+.chip.c{color:var(--cyan);border-color:rgba(0,212,255,.3)}
+.chip.a{color:var(--amber);border-color:rgba(255,184,0,.3)}
+/* launch page */
+.lgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:.75rem;margin-bottom:2rem}
+.lc{background:var(--s1);border:1px solid rgba(168,85,247,.22);border-radius:var(--r);padding:.9rem;position:relative;overflow:hidden}
+.lc:before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--violet);opacity:.6}
+.lt{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.6rem}
+.lbr{font-size:.53rem;color:var(--muted);text-transform:uppercase;letter-spacing:.12em;margin-bottom:2px}
+.lmo{font-family:'Syne',sans-serif;font-size:.88rem;font-weight:700}
+.lw{font-size:.55rem;font-weight:700;background:var(--violet);color:#fff;border-radius:4px;padding:2px 7px;white-space:nowrap}
+.lp{font-size:.8rem;color:var(--amber);font-weight:600;margin-bottom:.6rem}
+.lp small{font-size:.57rem;color:var(--muted);font-weight:400;display:block}
+.lsp{display:grid;grid-template-columns:1fr 1fr;gap:.32rem}
+.ls{background:var(--s2);border:1px solid var(--bdr);border-radius:6px;padding:.35rem .5rem}
+.lsl{font-size:.5rem;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:1px}
+.lsv{font-size:.68rem;font-weight:500}
+/* x1 */
+.x1-intro{max-width:640px;font-size:.78rem;color:var(--muted);line-height:1.7;margin-bottom:1.8rem}
+.x1s{margin-bottom:2.2rem}
+.x1t{font-family:'Syne',sans-serif;font-size:.88rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.8rem}
+.x1c{background:var(--s1);border:1px solid var(--bdr);border-radius:var(--r);overflow:hidden}
+.x1h{display:grid;grid-template-columns:140px 1fr 1fr;background:var(--s2);border-bottom:1px solid var(--bdr)}
+.x1hd{padding:.55rem .8rem;font-size:.56rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em}
+.x1hw{color:var(--amber);border-left:1px solid var(--bdr)}
+.x1hr{color:var(--muted);border-left:1px solid var(--bdr)}
+.x1r{display:grid;grid-template-columns:140px 1fr 1fr;border-bottom:1px solid var(--bdr)}
+.x1r:last-child{border-bottom:none}
+.x1l{background:var(--s2);padding:.6rem .8rem;font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;display:flex;align-items:center}
+.x1cell{padding:.6rem .8rem;font-size:.72rem;display:flex;align-items:center;gap:.35rem;border-left:1px solid var(--bdr)}
+.x1w{background:rgba(255,184,0,.04)}
+.wn{font-family:'Syne',sans-serif;font-weight:700}
+.ln2{color:var(--muted)}
+.rs{font-size:.6rem;color:var(--muted);margin-top:1px}
+.rs.g{color:var(--green)}.rs.a{color:var(--amber)}
+/* note */
+.note{margin-top:1.8rem;padding:.8rem 1rem;background:var(--s1);border:1px solid var(--bdr);border-radius:8px;font-size:.63rem;color:var(--muted);line-height:1.7}
+.note strong{color:var(--white)}
+/* GUIA EV */
+.guia-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:.85rem;margin-bottom:2rem}
+.guia-card{background:var(--s1);border:1px solid var(--bdr);border-radius:var(--r);padding:1rem;position:relative;overflow:hidden}
+.guia-card:before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gc,var(--cyan));opacity:.5}
+.guia-icon{font-size:1.6rem;margin-bottom:.5rem}
+.guia-title{font-family:'Syne',sans-serif;font-size:.82rem;font-weight:700;margin-bottom:.5rem;color:var(--gc,var(--cyan))}
+.guia-body{font-size:.68rem;color:var(--muted);line-height:1.7}
+.guia-body strong{color:var(--white)}
+.guia-body .val{color:var(--green);font-weight:600}
+.guia-body .warn{color:var(--amber);font-weight:600}
+.guia-body .bad{color:var(--red);font-weight:600}
+.guia-tip{margin-top:.5rem;padding:.45rem .6rem;background:var(--s2);border:1px solid var(--bdr);border-radius:6px;font-size:.62rem;color:var(--muted);line-height:1.6}
+.guia-tip strong{color:var(--cyan)}
+.guia-scale{display:flex;gap:3px;margin:.4rem 0}
+.guia-scale span{flex:1;height:6px;border-radius:3px}
+.guia-legend{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:.3rem;font-size:.56rem}
+.guia-legend i{font-style:normal}
+/* KANBAN */
+.kb-notice{background:rgba(255,184,0,.06);border:1px solid rgba(255,184,0,.2);border-radius:8px;padding:.7rem 1rem;margin-bottom:1.5rem;font-size:.68rem;color:var(--amber);line-height:1.6}
+.kb-notice strong{color:var(--white)}
+.kb-board{display:flex;gap:.7rem;overflow-x:auto;padding-bottom:1rem;margin-bottom:1.5rem}
+.kb-col{min-width:260px;max-width:300px;flex:1;background:var(--s1);border:1px solid var(--bdr);border-radius:var(--r);overflow:hidden;flex-shrink:0}
+.kb-col-hdr{padding:.65rem .8rem;font-family:'Syne',sans-serif;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;border-bottom:1px solid var(--bdr);display:flex;align-items:center;gap:.4rem}
+.kb-col-hdr .kb-dot{width:8px;height:8px;border-radius:50%}
+.kb-item{padding:.6rem .8rem;border-bottom:1px solid var(--bdr);transition:background .15s}
+.kb-item:last-child{border-bottom:none}
+.kb-item:hover{background:var(--s2)}
+.kb-model{font-family:'Syne',sans-serif;font-size:.72rem;font-weight:700;margin-bottom:.2rem}
+.kb-brand{font-size:.52rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.3rem}
+.kb-chips{display:flex;gap:.3rem;flex-wrap:wrap}
+.kb-chip{font-size:.55rem;background:var(--s2);border:1px solid var(--bdr);border-radius:4px;padding:1px 6px}
+.kb-chip.best{border-color:rgba(0,232,122,.4);color:var(--green)}
+.kb-chip.price{color:var(--amber);border-color:rgba(255,184,0,.3)}
+.kb-crown{font-size:.55rem;color:var(--amber);font-weight:700;margin-top:.25rem}
+@media(max-width:680px){.grid,.grid-5{grid-template-columns:1fr}.x1h,.x1r{grid-template-columns:100px 1fr 1fr}.nav{gap:0}.tab{padding:.7rem .65rem;font-size:.68rem}.guia-grid{grid-template-columns:1fr}.kb-board{flex-direction:column}.kb-col{min-width:100%;max-width:100%}}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="tab active" onclick="sp('todos',this)">⚡ Todos</div>
+  <div class="tab" onclick="sp('byd',this)">🐉 BYD</div>
+  <div class="tab" onclick="sp('chineses',this)">🇨🇳 Chineses</div>
+  <div class="tab" onclick="sp('europeus',this)">🇪🇺 Europeus</div>
+  <div class="tab" onclick="sp('americanos',this)">🇺🇸 Americanos</div>
+  <div class="tab" onclick="sp('lancamentos',this)">🚀 Lançamentos</div>
+  <div class="tab" onclick="sp('x1',this)">🏆 X1</div>
+  <div class="tab" onclick="sp('kanban',this)">📊 Kanban X1</div>
+  <div class="tab" onclick="sp('guia',this)">📖 Guia EV</div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!--  TODOS – por montadora                          -->
+<!-- ═══════════════════════════════════════════════ -->
+<div id="pg-todos" class="page active">
+<div class="ph"><div class="eyebrow">Mercado EV Brasil · Abril 2026</div><h2>Elétricos no Brasil<br>por Montadora</h2><p>Dados INMETRO / ABVE / concessionárias · atualizado 07 abril 2026</p></div>
+<div class="stats">
+  <div class="stat"><div class="sn">14.014</div><div class="sl">Vendas Mar/26</div></div>
+  <div class="stat"><div class="sn">70,7%</div><div class="sl">BYD Share</div></div>
+  <div class="stat"><div class="sn">+123%</div><div class="sl">vs Jan/2025</div></div>
+  <div class="stat"><div class="sn">20+</div><div class="sl">Marcas</div></div>
+  <div class="stat"><div class="sn">45+</div><div class="sl">Modelos</div></div>
+</div>
+
+<!-- BYD -->
+<div class="brand-sec">
+<div class="brand-hdr"><span class="brand-flag">🐉</span><span class="brand-name">BYD</span><div class="brand-line"></div><span class="brand-tag">Líder · 70,7% · Camaçari/BA</span></div>
+<div class="grid">
+  <div class="card" style="--cc:var(--cyan)">
+    <div class="cb">BYD · Entrada</div><div class="cm">Dolphin Mini 2026</div>
+    <div class="cp">R$ 99.990 – R$119.990<small>GL 30 kWh · Std 38 kWh · mais vendido BR</small></div>
+    <div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:55%"></div></div><span class="bk g">280 km</span></div>
+    <div class="sp">
+      <div class="sv"><div class="sl2">Bateria</div><div class="sv2">30–38 kWh LFP</div></div>
+      <div class="sv"><div class="sl2">Carga DC</div><div class="sv2 g">40 kW · 22 min</div></div>
+      <div class="sv"><div class="sl2">Potência</div><div class="sv2">75 cv</div></div>
+      <div class="sv"><div class="sl2">Nacional?</div><div class="sv2 g">Sim – BA</div></div>
+    </div>
+    <div class="ft"><span><span class="dot dg"></span>DC disponível</span><span class="vs">50% do mercado EV</span></div>
+  </div>
+
+  <div class="card" style="--cc:var(--cyan)">
+    <div class="bdg bdg-n">NOVO 2027</div>
+    <div class="cb">BYD · Hatch</div><div class="cm">Dolphin SE 2027</div>
+    <div class="cp">R$ 159.990<small>versão Special Edition · lançado 06/04/2026</small></div>
+    <div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:74%"></div></div><span class="bk g">405 km</span></div>
+    <div class="sp">
+      <div class="sv"><div class="sl2">Bateria</div><div class="sv2">45,12 kWh LFP</div></div>
+      <div class="sv"><div class="sl2">Carga DC</div><div class="sv2 g">80 kW · 20 min</div></div>
+      <div class="sv"><div class="sl2">Potência</div><div class="sv2 c">177 cv</div></div>
+      <div class="sv"><div class="sl2">0–100</div><div class="sv2">8 s</div></div>
+    </div>
+    <div class="ft"><span><span class="dot dg"></span>80 kW DC</span><span class="vs">vs. EX2 · ORA</span></div>
+  </div>
+
+  <div class="card" style="--cc:var(--cyan)">
+    <div class="cb">BYD · Hatch</div><div class="cm">Dolphin GS 2026</div>
+    <div class="cp">R$ 149.990<small>nacional Camaçari/BA · garantia 6 anos</small></div>
+    <div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:57%"></div></div><span class="bk g">291 km</span></div>
+    <div class="sp">
+      <div class="sv"><div class="sl2">Bateria</div><div class="sv2">44,9 kWh Blade</div></div>
+      <div class="sv"><div class="sl2">Carga DC</div><div class="sv2 g">60 kW DC</div></div>
+      <div class="sv"><div class="sl2">Potência</div><div class="sv2">95 cv</div></div>
+      <div class="sv"><div class="sl2">Nacional?</div><div class="sv2 g">Sim – BA</div></div>
+    </div>
+    <div class="ft"><span><span class="dot dg"></span>60 kW DC</span><span class="vs">vs. Spark EUV</span></div>
+  </div>
+
+  <div class="card" style="--cc:var(--cyan)">
+    <div class="cb">BYD · Hatch Plus</div><div class="cm">Dolphin Plus 2026</div>
+    <div class="cp">R$ 184.800<small>74,88 kWh · versão top hatch</small></div>
+    <div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:86%"></div></div><span class="bk c">530 km</span></div>
+    <div class="sp">
+      <div class="sv"><div class="sl2">Bateria</div><div class="sv2">74,88 kWh Blade</div></div>
+      <div class="sv"><div class="sl2">Carga DC</div><div class="sv2 c">80 kW · 20 min</div></div>
+      <div class="sv"><div class="sl2">Potência</div><div class="sv2">204 cv</div></div>
+      <div class="sv"><div class="sl2">Nacional?</div><div class="sv2 g">Sim – BA</div></div>
+    </div>
+    <div class="ft"><span><span class="dot dg"></span>80 kW DC</span><span class="vs">vs. EX5 · Yuan Pro</span></div>
+  </div>
+
+  <div class="card" style="--cc:var(--green)">
+    <div class="cb">BYD · SUV Compacto</div><div class="cm">Yuan Pro 2026</div>
+    <div class="cp">R$ 182.990<small>nacional Camaçari/BA</small></div>
+    <div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:50%;background:linear-gradient(90deg,var(--green),rgba(0,232,122,.2))"></div></div><span class="bk a">250 km</span></div>
+    <div class="sp">
+      <div class="sv"><div class="sl2">Bateria</div><div class="sv2">60,4 kWh Blade</div></div>
+      <div class="sv"><div class="sl2">Carga DC</div><div class="sv2 g">DC disponível</div></div>
+      <div class="sv"><div class="sl2">Potência</div><div class="sv2">177 cv</div></div>
+      <div class="sv"><div class="sl2">Nacional?</div><div class="sv2 g">Sim – BA</div></div>
+    </div>
+    <div class="ft"><span><span class="dot dg"></span>DC disponível</span><span class="vs">vs. EX5 · Captiva</span></div>
+  </div>
+
+  <div class="card" style="--cc:var(--green)">
+    <div class="bdg bdg-n">NOVO 2027</div>
+    <div class="cb">BYD · SUV AWD</div><div class="cm">Yuan Plus AWD 2027</div>
+    <div class="cp">R$ 269.990<small>lançado 06/04/2026 · 449 cv · AWD</small></div>
+    <div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:88%;background:linear-gradient(90deg,var(--green),rgba(0,232,122,.2))"></div></div><span class="bk c">530 km</span></div>
+    <div class="sp">
+      <div class="sv"><div class="sl2">Bateria</div><div class="sv2">74,88 kWh Blade</div></div>
+      <div class="sv"><div class="sl2">Carga DC</div><div class="sv2 c">DC · 20 min</div></div>
+      <div class="sv"><div class="sl2">Potência</div><div class="sv2 c">449 cv AWD</div></div>
+      <div class="sv"><div class="sl2">0–100</div><div class="sv2 c">3,9 s</div></div>
+    </div>
+    <div class="ft"><span><span class="dot dg"></span>800V · 20 min</span><span class="vs">vs. Zeekr 7X</span></div>
+  </div>
+
+  <div class="card" style="--cc:var(--green)">
+    <div class="cb">BYD · Sedã Esportivo</div><div class="cm">Seal 2026</div>
+    <div class="cp">R$ 219.800 – R$ 249.800<small>Dynamic · Performance AWD · nacional BA</small></div>
+    <div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:82%;background:linear-gradient(90deg,var(--green),rgba(0,232,122,.2))"></div></div><span class="bk g">~430 km</span></div>
+    <div class="sp">
+      <div class="sv"><div class="sl2">Bateria</div><div class="sv2">82,5 kWh Blade</div></div>
+      <div class="sv"><div class="sl2">Carga DC</div><div class="sv2 c">150 kW DC</div></div>
+      <div class="sv"><div class="sl2">Potência</div><div class="sv2 c">313–530 cv</div></div>
+      <div class="sv"><div class="sl2">0–100</div><div class="sv2 c">3,8 s AWD</div></div>
+    </div>
+    <div class="ft"><span><span class="dot dg"></span>150 kW DC</span><span class="vs">vs. EX30 Twin · i4</span></div>
+  </div>
+
+  <div class="card" style="--cc:var(--amber)">
+    <div class="cb">BYD · SUV Grande</div><div class="cm">Tan 2026</div>
+    <div class="cp">R$ ~420.000<small>SUV grande 6 lug. · 7 lugares · importado</small></div>
+    <div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:80%;background:linear-gradient(90deg,var(--amber),rgba(255,184,0,.2))"></div></div><span class="bk g">~415 km</span></div>
+    <div class="sp">
+      <div class="sv"><div class="sl2">Bateria</div><div class="sv2">108,8 kWh Blade</div></div>
+      <div class="sv"><div class="sl2">Carga DC</div><div class="sv2 c">110 kW DC</div></div>
+      <div class="sv"><div class="sl2">Potência</div><div class="sv2 c">517 cv AWD</div></div>
+      <div class="sv"><div class="sl2">Lugares</div><div class="sv2 g">7</div></div>
+    </div>
+    <div class="ft"><span><span class="dot dg"></span>110 kW DC</span><span class="vs">vs. EX90 · EQS SUV</span></div>
+  </div>
+
+  <div class="card" style="--cc:var(--violet)">
+    <div class="cb">Denza (BYD Group) · PHEV Premium</div><div class="cm">Denza B5 2026</div>
+    <div class="cp">~R$ 500.000<small>PHEV SUV · 680 cv total · 125 km modo EV</small></div>
+    <div class="br"><span class="bl">EV</span><div class="bb"><div class="bf" style="width:25%;background:linear-gradient(90deg,var(--violet),rgba(168,85,247,.2))"></div></div><span class="bk v">125 km</span></div>
+    <div class="sp">
+      <div class="sv"><div class="sl2">Motor</div><div class="sv2">1.5T + 2 elétricos</div></div>
+      <div class="sv"><div class="sl2">Auto. total</div><div class="sv2 g">~1.200 km</div></div>
+      <div class="sv"><div class="sl2">Potência</div><div class="sv2 v">680 cv</div></div>
+      <div class="sv"><div class="sl2">0–100</div><div class="sv2 v">4,8 s</div></div>
+    </div>
+    <div class="ft"><span><span class="dot" style="background:var(--violet)"></span>PHEV premium</span><span class="vs">vs. Q8 e-tron</span></div>
+  </div>
+</div>
+</div>
+
+<!-- GEELY -->
+<div class="brand-sec">
+<div class="brand-hdr"><span class="brand-flag">🇨🇳</span><span class="brand-name">Geely</span><div class="brand-line"></div><span class="brand-tag">2ª+ vendida · fila EX2</span></div>
+<div class="grid">
+  <div class="card" style="--cc:var(--cyan)">
+    <div class="cb">Geely · Hatch</div><div class="cm">EX2 Pro / Max 2026</div>
+    <div class="cp">R$ 123.800 – R$ 136.800<small>mais potente da categoria · 70 kW DC · fila 3 meses</small></div>
+    <div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:58%"></div></div><span class="bk g">289 km</span></div>
+    <div class="sp">
+      <div class="sv"><div class="sl2">Bateria</div><div class="sv2">39,4 kWh LFP</div></div>
+      <div class="sv"><div class="sl2">Carga DC</div><div class="sv2 c">70 kW · 21 min</div></div>
+      <div class="sv"><div class="sl2">Potência</div><div class="sv2 c">116 cv</div></div>
+      <div class="sv"><div class="sl2">Porta-malas</div><div class="sv2 g">375 L + frunk</div></div>
+    </div>
+    <div class="ft"><span><span class="dot dg"></span>70 kW DC</span><span class="vs">vs. Dolphin Mini</span></div>
+  </div>
+  <div class="card" style="--cc:var(--green)">
+    <div class="cb">Geely · SUV Médio</div><div class="cm">EX5 Pro / Max 2026</div>
+    <div class="cp">R$ 195.800 – R$ 225.800<small>Pro · Max · mais barato que HR-V · 413 km INMETRO</small></div>
+    <div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:82%;background:linear-gradient(90deg,var(--green),rgba(0,232,122,.2))"></div></div><span class="bk g">413 km</span></div>
+    <div class="sp">
+      <div class="sv"><div class="sl2">Bateria</div><div class="sv2">60,22 kWh LFP</div></div>
+      <div class="sv"><div class="sl2">Carga DC</div><div class="sv2 g">30→80% em 20 min</div></div>
+      <div class="sv"><div class="sl2">Potência</div><div class="sv2 c">218 cv</div></div>
+      <div class="sv"><div class="sl2">Dimensões</div><div class="sv2">4,79m · SUV médio</div></div>
+    </div>
+    <div class="ft"><span><span class="dot dg"></span>DC 20 min</span><span class="vs">vs. Yuan Pro · Aion V</span></div>
+  </div>
+</div>
+</div>
+
+<!-- GWM -->
+<div class="brand-sec">
+<div class="brand-hdr"><span class="brand-flag">🇨🇳</span><span class="brand-name">GWM / ORA</span><div class="brand-line"></div><span class="brand-tag">Iracemápolis/SP · design retrô</span></div>
+<div class="grid">
+  <div class="card" style="--cc:var(--green)">
+    <div class="cb">GWM ORA · Hatch</div><div class="cm">ORA 03 Skin BEV48</div>
+    <div class="cp">R$ 169.000<small>48 kWh · estilo retrô · 7 airbags</small></div>
+    <div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:45%;background:linear-gradient(90deg,var(--green),rgba(0,232,122,.2))"></div></div><span class="bk a">232 km</span></div>
+    <div class="sp">
+      <div class="sv"><div class="sl2">Bateria</div><div class="sv2">48 kWh</div></div>
+      <div class="sv"><div class="sl2">Carga DC</div><div class="sv2 g">DC · 30 min</div></div>
+      <div class="sv"><div class="sl2">Potência</div><div class="sv2">171 cv</div></div>
+      <div class="sv"><div class="sl2">ADAS</div><div class="sv2 g">Nível 2+</div></div>
+    </div>
+    <div class="ft"><span><span class="dot dg"></span>DC · estilo único</span><span class="vs">vs. Dolphin GS</span></div>
+  </div>
+  <div class="card" style="--cc:var(--green)">
+    <div class="cb">GWM ORA · Hatch Topo</div><div class="cm">ORA 03 GT BEV63</div>
+    <div class="cp">R$ 169.000 – R$ 199.000<small>63 kWh · teto solar panorâmico · ADAS completo</small></div>
+    <div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:58%;background:linear-gradient(90deg,var(--green),rgba(0,232,122,.2))"></div></div><span class="bk g">295 km</span></div>
+    <div class="sp">
+      <div class="sv"><div class="sl2">Bateria</div><div class="sv2">63 kWh</div></div>
+      <div class="sv"><div class="sl2">Carga DC</div><div class="sv2 g">DC disponível</div></div>
+      <div class="sv"><div class="sl2">Potência</div><div class="sv2">171 cv</div></div>
+      <div class="sv"><div class="sl2">WLTP real</div><div class="sv2 c">~420 km</div></div>
+    </div>
+    <div class="ft"><span><span class="dot dg"></span>DC · teto solar série</span><span class="vs">vs. BYD Seal</span></div>
+  </div>
+</div>
+</div>
+
+<!-- GAC AION -->
+<div class="brand-sec">
+<div class="brand-hdr"><span class="brand-flag">🇨🇳</span><span class="brand-name">GAC Aion</span><div class="brand-line"></div><span class="brand-tag">entrada recente · importado</span></div>
+<div class="grid">
+  <div class="card" style="--cc:var(--blue)">
+    <div class="cb">GAC Aion · Hatch</div><div class="cm">Aion Y 2026</div>
+    <div class="cp">~R$ 175.000<small>hatch/crossover compacto · importado China</small></div>
+    <div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:52%;background:linear-gradient(90deg,var(--blue),rgba(59,130,246,.2))"></div></div><span class="bk">~260 km</span></div>
+    <div class="sp">
+      <div class="sv"><div class="sl2">Bateria</div><div class="sv2">45 kWh LFP</div></div>
+      <div class="sv"><div class="sl2">Carga DC</div><div class="sv2 g">DC disponível</div></div>
+      <div class="sv"><div class="sl2">Potência</div><div class="sv2">136 cv</div></div>
+      <div class="sv"><div class="sl2">Nacional?</div><div class="sv2 r">Não</div></div>
+    </div>
+    <div class="ft"><span><span class="dot dg"></span>DC disponível</span><span class="vs">vs. ORA 03 · Dolphin</span></div>
+  </div>
+  <div class="card" style="--cc:var(--blue)">
+    <div class="cb">GAC Aion · SUV</div><div class="cm">Aion V 2026</div>
+    <div class="cp">~R$ 200.000<small>SUV médio · concorre com EX5 · importado</small></div>
+    <div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:80%;background:linear-gradient(90deg,var(--blue),rgba(59,130,246,.2))"></div></div><span class="bk g">~500 km</span></div>
+    <div class="sp">
+      <div class="sv"><div class="sl2">Bateria</div><div class="sv2">~70 kWh LFP</div></div>
+      <div class="sv"><div class="sl2">Carga DC</div><div class="sv2 g">DC disponível</div></div>
+      <div class="sv"><div class="sl2">Potência</div><div class="sv2 c">204 cv</div></div>
+      <div class="sv"><div class="sl2">Nacional?</div><div class="sv2 r">Não</div></div>
+    </div>
+    <div class="ft"><span><span class="dot dg"></span>DC disponível</span><span class="vs">vs. EX5 · Yuan Pro</span></div>
+  </div>
+</div>
+</div>
+
+<!-- LEAPMOTOR -->
+<div class="brand-sec">
+<div class="brand-hdr"><span class="brand-flag">🇨🇳</span><span class="brand-name">Leapmotor</span><div class="brand-line"></div><span class="brand-tag">Stellantis · entrada recente 2026</span></div>
+<div class="grid">
+  <div class="card" style="--cc:var(--cyan)">
+    <div class="bdg bdg-v">Novo 2026</div>
+    <div class="cb">Leapmotor · Hatch</div><div class="cm">B10</div>
+    <div class="cp">~R$ 120.000 – R$ 140.000<small>44 unidades mar/26 · parceiro Stellantis BR</small></div>
+    <div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:50%"></div></div><span class="bk">~250 km</span></div>
+    <div class="sp">
+      <div class="sv"><div class="sl2">Tipo</div><div class="sv2">Hatch compacto</div></div>
+      <div class="sv"><div class="sl2">Carga DC</div><div class="sv2 g">DC disponível</div></div>
+      <div class="sv"><div class="sl2">Parceiro</div><div class="sv2">Stellantis</div></div>
+      <div class="sv"><div class="sl2">Status</div><div class="sv2 a">Início vendas</div></div>
+    </div>
+    <div class="ft"><span><span class="dot dg"></span>DC disponível</span><span class="vs">vs. Kwid E-Tech</span></div>
+  </div>
+  <div class="card" style="--cc:var(--green)">
+    <div class="cb">Leapmotor · SUV</div><div class="cm">C10</div>
+    <div class="cp">~R$ 180.000 – R$ 220.000<small>SUV elétrico recente no Brasil</small></div>
+    <div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:78%;background:linear-gradient(90deg,var(--green),rgba(0,232,122,.2))"></div></div><span class="bk g">~420 km</span></div>
+    <div class="sp">
+      <div class="sv"><div class="sl2">Bateria</div><div class="sv2">~66 kWh LFP</div></div>
+      <div class="sv"><div class="sl2">Carga DC</div><div class="sv2 g">DC disponível</div></div>
+      <div class="sv"><div class="sl2">Potência</div><div class="sv2">218 cv</div></div>
+      <div class="sv"><div class="sl2">Parceiro</div><div class="sv2">Stellantis</div></div>
+    </div>
+    <div class="ft"><span><span class="dot dg"></span>DC disponível</span><span class="vs">vs. EX5 · Aion V</span></div>
+  </div>
+</div>
+</div>
+
+<!-- ZEEKR -->
+<div class="brand-sec">
+<div class="brand-hdr"><span class="brand-flag">🇨🇳</span><span class="brand-name">Zeekr</span><div class="brand-line"></div><span class="brand-tag">Geely Group · premium chinês</span></div>
+<div class="grid">
+  <div class="card" style="--cc:var(--amber)">
+    <div class="cb">Zeekr · Compacto</div><div class="cm">Zeekr X 2026</div>
+    <div class="cp">~R$ 220.000 – R$ 260.000<small>SUV compacto premium · importado</small></div>
+    <div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:68%;background:linear-gradient(90deg,var(--amber),rgba(255,184,0,.2))"></div></div><span class="bk g">~395 km</span></div>
+    <div class="sp">
+      <div class="sv"><div class="sl2">Bateria</div><div class="sv2">66 kWh NMC</div></div>
+      <div class="sv"><div class="sl2">Carga DC</div><div class="sv2 c">150 kW DC</div></div>
+      <div class="sv"><div class="sl2">Potência</div><div class="sv2 c">315 cv AWD</div></div>
+      <div class="sv"><div class="sl2">0–100</div><div class="sv2 c">3,8 s</div></div>
+    </div>
+    <div class="ft"><span><span class="dot dg"></span>150 kW DC</span><span class="vs">vs. EX30 · Q8 e-tron</span></div>
+  </div>
+  <div class="card" style="--cc:var(--amber)">
+    <div class="cb">Zeekr · Sedã</div><div class="cm">Zeekr 001 2026</div>
+    <div class="cp">~R$ 380.000 – R$ 420.000<small>sedã/fastback premium · vendas limitadas 2026</small></div>
+    <div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:96%;background:linear-gradient(90deg,var(--amber),rgba(255,184,0,.2))"></div></div><span class="bk c">~750 km</span></div>
+    <div class="sp">
+      <div class="sv"><div class="sl2">Bateria</div><div class="sv2">100 kWh NMC</div></div>
+      <div class="sv"><div class="sl2">Carga DC</div><div class="sv2 c">200+ kW DC</div></div>
+      <div class="sv"><div class="sl2">Potência</div><div class="sv2 c">544 cv AWD</div></div>
+      <div class="sv"><div class="sl2">0–100</div><div class="sv2 c">3,8 s</div></div>
+    </div>
+    <div class="ft"><span><span class="dot dg"></span>200+ kW DC</span><span class="vs">vs. Seal · BMW i4</span></div>
+  </div>
+  <div class="card" style="--cc:var(--amber)">
+    <div class="cb">Zeekr · SUV Premium</div><div class="cm">Zeekr 7X 2026</div>
+    <div class="cp">R$ 350.000 – R$ 390.000<small>SUV médio-grande · 544 cv AWD · 200+ kW DC</small></div>
+    <div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:88%;background:linear-gradient(90deg,var(--amber),rgba(255,184,0,.2))"></div></div><span class="bk g">~550 km</span></div>
+    <div class="sp">
+      <div class="sv"><div class="sl2">Bateria</div><div class="sv2">75–100 kWh NMC</div></div>
+      <div class="sv"><div class="sl2">Carga DC</div><div class="sv2 c">200+ kW DC</div></div>
+      <div class="sv"><div class="sl2">Potência</div><div class="sv2 c">544 cv AWD</div></div>
+      <div class="sv"><div class="sl2">0–100</div><div class="sv2 c">3,8 s</div></div>
+    </div>
+    <div class="ft"><span><span class="dot dg"></span>200+ kW DC</span><span class="vs">vs. Equinox EV · Macan</span></div>
+  </div>
+</div>
+</div>
+
+<!-- OUTROS CHINESES -->
+<div class="brand-sec">
+<div class="brand-hdr"><span class="brand-flag">🇨🇳</span><span class="brand-name">MG · JAC · Omoda · Neta</span><div class="brand-line"></div><span class="brand-tag">outros chineses</span></div>
+<div class="grid">
+  <div class="card" style="--cc:var(--cyan)">
+    <div class="cb">MG (SAIC) · Hatch</div><div class="cm">MG4 2026</div>
+    <div class="cp">~R$ 180.000 – R$ 220.000<small>hatch esportivo · plataforma MSP</small></div>
+    <div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:72%"></div></div><span class="bk g">~385 km</span></div>
+    <div class="sp">
+      <div class="sv"><div class="sl2">Bateria</div><div class="sv2">51–77 kWh LFP</div></div>
+      <div class="sv"><div class="sl2">Carga DC</div><div class="sv2 g">135 kW DC</div></div>
+      <div class="sv"><div class="sl2">Potência</div><div class="sv2 c">170–340 cv</div></div>
+      <div class="sv"><div class="sl2">0–100</div><div class="sv2 c">3,8 s (top)</div></div>
+    </div>
+    <div class="ft"><span><span class="dot dg"></span>135 kW DC</span><span class="vs">vs. ORA 03 · Dolphin</span></div>
+  </div>
+  <div class="card" style="--cc:var(--cyan)">
+    <div class="cb">Omoda / Chery · SUV</div><div class="cm">Omoda E5 2026</div>
+    <div class="cp">~R$ 180.000 – R$ 200.000<small>68 unidades mar/26 · Chery Group</small></div>
+    <div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:70%"></div></div><span class="bk g">~430 km</span></div>
+    <div class="sp">
+      <div class="sv"><div class="sl2">Tipo</div><div class="sv2">SUV Compacto</div></div>
+      <div class="sv"><div class="sl2">Carga DC</div><div class="sv2 g">DC disponível</div></div>
+      <div class="sv"><div class="sl2">Status</div><div class="sv2 g">Vendas ativas</div></div>
+      <div class="sv"><div class="sl2">Origem</div><div class="sv2">Chery Group</div></div>
+    </div>
+    <div class="ft"><span><span class="dot dg"></span>DC disponível</span><span class="vs">vs. EX5 · Aion V</span></div>
+  </div>
+  <div class="card" style="--cc:var(--cyan)">
+    <div class="cb">Neta (Hozon) · SUV</div><div class="cm">Neta X 2026</div>
+    <div class="cp">~R$ 150.000 – R$ 180.000<small>43 unidades mar/26 · início de vendas</small></div>
+    <div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:65%"></div></div><span class="bk">~380 km</span></div>
+    <div class="sp">
+      <div class="sv"><div class="sl2">Tipo</div><div class="sv2">SUV Compacto</div></div>
+      <div class="sv"><div class="sl2">Carga DC</div><div class="sv2 g">DC disponível</div></div>
+      <div class="sv"><div class="sl2">Status</div><div class="sv2 a">Início vendas</div></div>
+      <div class="sv"><div class="sl2">Origem</div><div class="sv2">Hozon Auto</div></div>
+    </div>
+    <div class="ft"><span><span class="dot dg"></span>DC disponível</span><span class="vs">vs. Leapmotor C10</span></div>
+  </div>
+</div>
+</div>
+
+<!-- JAC -->
+<div class="brand-sec">
+<div class="brand-hdr"><span class="brand-flag">🇨🇳</span><span class="brand-name">JAC Motors</span><div class="brand-line"></div><span class="brand-tag">parceria Volkswagen · segmentos variados</span></div>
+<div class="grid grid-5">
+  <div class="ccard" style="--cc:var(--cyan)">
+    <div class="cc-top"><div class="cc-model">E-JS1</div><div class="cc-price">~R$80–110k</div></div>
+    <div class="cc-specs"><span class="chip">Mini hatch</span><span class="chip g">DC disponível</span><span class="chip">~200 km</span></div>
+  </div>
+  <div class="ccard" style="--cc:var(--cyan)">
+    <div class="cc-top"><div class="cc-model">E-JS4</div><div class="cc-price">~R$150–180k</div></div>
+    <div class="cc-specs"><span class="chip">SUV compacto</span><span class="chip g">DC disponível</span><span class="chip">~350 km</span></div>
+  </div>
+  <div class="ccard" style="--cc:var(--cyan)">
+    <div class="cc-top"><div class="cc-model">E-J7</div><div class="cc-price">~R$180–220k</div></div>
+    <div class="cc-specs"><span class="chip">Sedã médio</span><span class="chip g">DC disponível</span><span class="chip">~400 km</span></div>
+  </div>
+</div>
+</div>
+
+<!-- VOLVO -->
+<div class="brand-sec">
+<div class="brand-hdr"><span class="brand-flag">🇸🇪</span><span class="brand-name">Volvo</span><div class="brand-line"></div><span class="brand-tag">3,15% mkt share · 441 un mar/26</span></div>
+<div class="grid">
+  <div class="card" style="--cc:var(--amber)">
+    <div class="bdg bdg-g">Mais Vendido</div>
+    <div class="cb">Volvo · Mini-SUV</div><div class="cm">EX30 2026</div>
+    <div class="cp">R$ 229.950 – R$ 249.950<small>Single · Twin Motor · 153 kW DC em 26 min</small></div>
+    <div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:65%;background:linear-gradient(90deg,var(--amber),rgba(255,184,0,.2))"></div></div><span class="bk g">250–338 km</span></div>
+    <div class="sp">
+      <div class="sv"><div class="sl2">Bateria</div><div class="sv2">51–69 kWh NMC</div></div>
+      <div class="sv"><div class="sl2">Carga DC</div><div class="sv2 c">153 kW · 26 min</div></div>
+      <div class="sv"><div class="sl2">Potência</div><div class="sv2 c">203–272 cv</div></div>
+      <div class="sv"><div class="sl2">0–100</div><div class="sv2 c">3,6 s (Twin)</div></div>
+    </div>
+    <div class="ft"><span><span class="dot dg"></span>153 kW DC</span><span class="vs">vs. BYD Seal · MINI</span></div>
+  </div>
+  <div class="card" style="--cc:var(--amber)">
+    <div class="cb">Volvo · SUV / Coupé</div><div class="cm">EX40 / EC40 2026</div>
+    <div class="cp">R$ 320.000 – R$ 360.000<small>mesma mecânica · SUV ou carroceria coupé</small></div>
+    <div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:86%;background:linear-gradient(90deg,var(--amber),rgba(255,184,0,.2))"></div></div><span class="bk g">~500 km</span></div>
+    <div class="sp">
+      <div class="sv"><div class="sl2">Bateria</div><div class="sv2">82 kWh NMC</div></div>
+      <div class="sv"><div class="sl2">Carga DC</div><div class="sv2 c">150 kW DC</div></div>
+      <div class="sv"><div class="sl2">Potência</div><div class="sv2 c">231–408 cv</div></div>
+      <div class="sv"><div class="sl2">0–100</div><div class="sv2 c">4,7 s AWD</div></div>
+    </div>
+    <div class="ft"><span><span class="dot dg"></span>150 kW DC</span><span class="vs">vs. Equinox EV · Zeekr</span></div>
+  </div>
+  <div class="card" style="--cc:var(--amber)">
+    <div class="cb">Volvo · SUV Grande</div><div class="cm">EX90 2026</div>
+    <div class="cp">R$ 849.950<small>7 lug. · LiDAR integrado · 459 km INMETRO</small></div>
+    <div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:92%;background:linear-gradient(90deg,var(--amber),rgba(255,184,0,.2))"></div></div><span class="bk c">459 km</span></div>
+    <div class="sp">
+      <div class="sv"><div class="sl2">Bateria</div><div class="sv2">111 kWh NMC</div></div>
+      <div class="sv"><div class="sl2">Carga DC</div><div class="sv2 c">250 kW DC</div></div>
+      <div class="sv"><div class="sl2">Potência</div><div class="sv2 c">517 cv AWD</div></div>
+      <div class="sv"><div class="sl2">Lugares</div><div class="sv2 g">7</div></div>
+    </div>
+    <div class="ft"><span><span class="dot dg"></span>250 kW DC · LiDAR</span><span class="vs">vs. BMW iX · EQS</span></div>
+  </div>
+</div>
+</div>
+
+<!-- BMW -->
+<div class="brand-sec">
+<div class="brand-hdr"><span class="brand-flag">🇩🇪</span><span class="brand-name">BMW</span><div class="brand-line"></div><span class="brand-tag">premium alemão · 4 modelos EV</span></div>
+<div class="grid">
+  <div class="card" style="--cc:var(--amber)">
+    <div class="cb">BMW · SUV Compacto</div><div class="cm">iX1 xDrive30 2026</div>
+    <div class="cp">R$ 383.950<small>M Sport · eAWD · plataforma BEV</small></div>
+    <div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:70%;background:linear-gradient(90deg,var(--amber),rgba(255,184,0,.2))"></div></div><span class="bk g">~438 km</span></div>
+    <div class="sp">
+      <div class="sv"><div class="sl2">Bateria</div><div class="sv2">64,7 kWh NMC</div></div>
+      <div class="sv"><div class="sl2">Carga DC</div><div class="sv2 c">130 kW DC</div></div>
+      <div class="sv"><div class="sl2">Potência</div><div class="sv2 c">313 cv AWD</div></div>
+      <div class="sv"><div class="sl2">0–100</div><div class="sv2 c">5,6 s</div></div>
+    </div>
+    <div class="ft"><span><span class="dot dg"></span>130 kW DC</span><span class="vs">vs. EX30 · Equinox EV</span></div>
+  </div>
+  <div class="card" style="--cc:var(--amber)">
+    <div class="cb">BMW · Sedã Esport.</div><div class="cm">i4 eDrive40 M Sport 2026</div>
+    <div class="cp">R$ 582.950<small>M50 R$675.950 · sedã elétrico premium</small></div>
+    <div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:84%;background:linear-gradient(90deg,var(--amber),rgba(255,184,0,.2))"></div></div><span class="bk g">~460 km</span></div>
+    <div class="sp">
+      <div class="sv"><div class="sl2">Bateria</div><div class="sv2">83,9 kWh NMC</div></div>
+      <div class="sv"><div class="sl2">Carga DC</div><div class="sv2 c">210 kW DC</div></div>
+      <div class="sv"><div class="sl2">Potência</div><div class="sv2 c">340–544 cv</div></div>
+      <div class="sv"><div class="sl2">0–100</div><div class="sv2 c">3,9 s (M50)</div></div>
+    </div>
+    <div class="ft"><span><span class="dot dg"></span>210 kW DC</span><span class="vs">vs. Zeekr 001 · Seal</span></div>
+  </div>
+  <div class="card" style="--cc:var(--amber)">
+    <div class="cb">BMW · SUV Grande</div><div class="cm">iX xDrive50 2026</div>
+    <div class="cp">~R$ 750.000 – R$ 900.000<small>maior autonomia BR entre os SUVs · 528 km INMETRO</small></div>
+    <div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:100%;background:linear-gradient(90deg,var(--amber),rgba(255,184,0,.2))"></div></div><span class="bk c">528 km 🥇</span></div>
+    <div class="sp">
+      <div class="sv"><div class="sl2">Bateria</div><div class="sv2">111,5 kWh NMC</div></div>
+      <div class="sv"><div class="sl2">Carga DC</div><div class="sv2 c">200 kW DC</div></div>
+      <div class="sv"><div class="sl2">Potência</div><div class="sv2 c">523 cv AWD</div></div>
+      <div class="sv"><div class="sl2">0–100</div><div class="sv2 c">4,6 s</div></div>
+    </div>
+    <div class="ft"><span><span class="dot dg"></span>528 km 🥇 maior auto. SUV</span><span class="vs">vs. EX90 · EQS SUV</span></div>
+  </div>
+  <div class="card" style="--cc:var(--violet)">
+    <div class="bdg bdg-v">Chegando 2026</div>
+    <div class="cb">BMW Neue Klasse · SUV</div><div class="cm">iX3 2026</div>
+    <div class="cp">~R$ 500.000+<small>800V · Neue Klasse · 805 km WLTP · homologação BR</small></div>
+    <div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:100%;background:linear-gradient(90deg,var(--violet),rgba(168,85,247,.2))"></div></div><span class="bk v">805 km WLTP</span></div>
+    <div class="sp">
+      <div class="sv"><div class="sl2">Plataforma</div><div class="sv2 v">Neue Klasse</div></div>
+      <div class="sv"><div class="sl2">Carga DC</div><div class="sv2 v">400 kW DC</div></div>
+      <div class="sv"><div class="sl2">Potência</div><div class="sv2 c">469 cv</div></div>
+      <div class="sv"><div class="sl2">Status</div><div class="sv2 v">Homologação</div></div>
+    </div>
+    <div class="ft"><span><span class="dot" style="background:var(--violet)"></span>400 kW DC · gen. nova</span><span class="vs">vs. Taycan · iX</span></div>
+  </div>
+</div>
+</div>
+
+<!-- AUDI -->
+<div class="brand-sec">
+<div class="brand-hdr"><span class="brand-flag">🇩🇪</span><span class="brand-name">Audi</span><div class="brand-line"></div><span class="brand-tag">premium alemão · e-tron line</span></div>
+<div class="grid grid-5">
+  <div class="ccard" style="--cc:var(--amber)">
+    <div class="cc-top"><div class="cc-model">Q8 e-tron</div><div class="cc-price">~R$600–700k</div></div>
+    <div class="cc-specs"><span class="chip">SUV Grande</span><span class="chip c">150 kW DC</span><span class="chip g">~400 km</span><span class="chip">408–503 cv</span></div>
+  </div>
+  <div class="ccard" style="--cc:var(--amber)">
+    <div class="cc-top"><div class="cc-model">Q8 e-tron Sportback</div><div class="cc-price">~R$650–720k</div></div>
+    <div class="cc-specs"><span class="chip">SUV Coupé</span><span class="chip c">170 kW DC</span><span class="chip g">~410 km</span><span class="chip">340–408 cv</span></div>
+  </div>
+  <div class="ccard" style="--cc:var(--amber)">
+    <div class="cc-top"><div class="cc-model">e-tron GT</div><div class="cc-price">~R$800k–1M</div></div>
+    <div class="cc-specs"><span class="chip">Sedã Esport.</span><span class="chip c">270 kW DC</span><span class="chip g">~470 km</span><span class="chip">476–646 cv</span></div>
+  </div>
+</div>
+</div>
+
+<!-- MERCEDES -->
+<div class="brand-sec">
+<div class="brand-hdr"><span class="brand-flag">🇩🇪</span><span class="brand-name">Mercedes-Benz</span><div class="brand-line"></div><span class="brand-tag">linha EQ completa · 4 modelos</span></div>
+<div class="grid grid-5">
+  <div class="ccard" style="--cc:var(--amber)">
+    <div class="cc-top"><div class="cc-model">EQA 250</div><div class="cc-price">~R$290–340k</div></div>
+    <div class="cc-specs"><span class="chip">SUV Compacto</span><span class="chip c">100 kW DC</span><span class="chip g">~400 km</span><span class="chip">190 cv</span></div>
+  </div>
+  <div class="ccard" style="--cc:var(--amber)">
+    <div class="cc-top"><div class="cc-model">EQB 350</div><div class="cc-price">~R$380–420k</div></div>
+    <div class="cc-specs"><span class="chip">SUV 7 Lug.</span><span class="chip c">100 kW DC</span><span class="chip g">~370 km</span><span class="chip">292 cv AWD</span></div>
+  </div>
+  <div class="ccard" style="--cc:var(--amber)">
+    <div class="cc-top"><div class="cc-model">EQE 350</div><div class="cc-price">~R$480–550k</div></div>
+    <div class="cc-specs"><span class="chip">Sedã</span><span class="chip c">170 kW DC</span><span class="chip g">~540 km</span><span class="chip">292 cv</span></div>
+  </div>
+  <div class="ccard" style="--cc:var(--amber)">
+    <div class="cc-top"><div class="cc-model">EQS 450+</div><div class="cc-price">~R$700k–1M</div></div>
+    <div class="cc-specs"><span class="chip">Sedã Lux.</span><span class="chip c">200 kW DC</span><span class="chip g">~780 km</span><span class="chip">333 cv</span></div>
+  </div>
+</div>
+</div>
+
+<!-- CHEVROLET -->
+<div class="brand-sec">
+<div class="brand-hdr"><span class="brand-flag">🇺🇸</span><span class="brand-name">Chevrolet</span><div class="brand-line"></div><span class="brand-tag">4 modelos · plataformas chinesa + Ultium</span></div>
+<div class="grid">
+  <div class="card" style="--cc:var(--cyan)">
+    <div class="cb">Chevrolet · Nacional</div><div class="cm">Spark EUV 2026</div>
+    <div class="cp">R$ 154.990<small>mini-SUV · nacional Horizonte/CE · ADAS completo</small></div>
+    <div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:52%"></div></div><span class="bk a">258 km</span></div>
+    <div class="sp">
+      <div class="sv"><div class="sl2">Bateria</div><div class="sv2">42 kWh LFP</div></div>
+      <div class="sv"><div class="sl2">Carga DC</div><div class="sv2 a">DC · 35 min</div></div>
+      <div class="sv"><div class="sl2">Potência</div><div class="sv2">101 cv</div></div>
+      <div class="sv"><div class="sl2">ADAS</div><div class="sv2 g">Completo série</div></div>
+    </div>
+    <div class="ft"><span><span class="dot dg"></span>DC · ADAS série</span><span class="vs">vs. Dolphin GS</span></div>
+  </div>
+  <div class="card" style="--cc:var(--green)">
+    <div class="bdg bdg-v">2026</div>
+    <div class="cb">Chevrolet · SUV</div><div class="cm">Captiva EV 2026</div>
+    <div class="cp">~R$ 200.000<small>estimado · base Wuling Starlight S · previsto 2026</small></div>
+    <div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:70%;background:linear-gradient(90deg,var(--green),rgba(0,232,122,.2))"></div></div><span class="bk g">~350 km</span></div>
+    <div class="sp">
+      <div class="sv"><div class="sl2">Bateria</div><div class="sv2">60 kWh LFP</div></div>
+      <div class="sv"><div class="sl2">Carga DC</div><div class="sv2 g">DC disponível</div></div>
+      <div class="sv"><div class="sl2">Potência</div><div class="sv2">204 cv</div></div>
+      <div class="sv"><div class="sl2">Status</div><div class="sv2 a">Lançamento 2026</div></div>
+    </div>
+    <div class="ft"><span><span class="dot dg"></span>DC disponível</span><span class="vs">vs. Yuan Pro · EX5</span></div>
+  </div>
+  <div class="card" style="--cc:var(--amber)">
+    <div class="cb">Chevrolet · SUV Médio</div><div class="cm">Equinox EV RS 2026</div>
+    <div class="cp">R$ 349.990<small>rebaixado de R$419k · 85 kWh Ultium · eAWD</small></div>
+    <div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:90%;background:linear-gradient(90deg,var(--amber),rgba(255,184,0,.2))"></div></div><span class="bk c">443 km</span></div>
+    <div class="sp">
+      <div class="sv"><div class="sl2">Bateria</div><div class="sv2">85 kWh Ultium</div></div>
+      <div class="sv"><div class="sl2">Carga DC</div><div class="sv2 c">150 kW · 48 min</div></div>
+      <div class="sv"><div class="sl2">Potência</div><div class="sv2 c">292 cv eAWD</div></div>
+      <div class="sv"><div class="sl2">0–100</div><div class="sv2">5,8 s</div></div>
+    </div>
+    <div class="ft"><span><span class="dot dg"></span>150 kW DC · 17,7" tela</span><span class="vs">vs. EX40 · Zeekr 7X</span></div>
+  </div>
+  <div class="card" style="--cc:var(--red)">
+    <div class="bdg bdg-g">Maior Auto. GM</div>
+    <div class="cb">Chevrolet · SUV Topo</div><div class="cm">Blazer EV RS 2026</div>
+    <div class="cp">R$ 503.190<small>102 kWh Ultium · AWD · 481 km INMETRO 🥇</small></div>
+    <div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:100%;background:linear-gradient(90deg,var(--red),rgba(255,77,77,.2))"></div></div><span class="bk c">481 km 🥇</span></div>
+    <div class="sp">
+      <div class="sv"><div class="sl2">Bateria</div><div class="sv2">102 kWh Ultium</div></div>
+      <div class="sv"><div class="sl2">Carga DC</div><div class="sv2 c">190 kW DC</div></div>
+      <div class="sv"><div class="sl2">Potência</div><div class="sv2 c">347 cv</div></div>
+      <div class="sv"><div class="sl2">Tela</div><div class="sv2 c">17,7" Google</div></div>
+    </div>
+    <div class="ft"><span><span class="dot dg"></span>190 kW DC</span><span class="vs">vs. EX90 · Macan</span></div>
+  </div>
+</div>
+</div>
+
+<!-- RENAULT -->
+<div class="brand-sec">
+<div class="brand-hdr"><span class="brand-flag">🇫🇷</span><span class="brand-name">Renault</span><div class="brand-line"></div><span class="brand-tag">mais barato do BR · nacional Curitiba/PR</span></div>
+<div class="grid">
+  <div class="card" style="--cc:var(--cyan)">
+    <div class="cb">Renault · Hatch</div><div class="cm">Kwid E-Tech 2026</div>
+    <div class="cp">R$ 99.990<small>mais barato do Brasil · nacional Curitiba/PR · sem DC</small></div>
+    <div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:36%"></div></div><span class="bk r">180 km</span></div>
+    <div class="sp">
+      <div class="sv"><div class="sl2">Bateria</div><div class="sv2">26,8 kWh LFP</div></div>
+      <div class="sv"><div class="sl2">Carga DC</div><div class="sv2 r">Só AC 11 kW</div></div>
+      <div class="sv"><div class="sl2">Potência</div><div class="sv2">65 cv</div></div>
+      <div class="sv"><div class="sl2">Nacional?</div><div class="sv2 g">Sim – PR</div></div>
+    </div>
+    <div class="ft"><span><span class="dot dr"></span>Sem DC · só AC</span><span class="vs">vs. Dolphin Mini</span></div>
+  </div>
+</div>
+</div>
+
+<!-- FIAT / TESLA / MINI / NISSAN -->
+<div class="brand-sec">
+<div class="brand-hdr"><span class="brand-flag">🌍</span><span class="brand-name">Fiat · Tesla · Mini · Nissan · Porsche</span><div class="brand-line"></div><span class="brand-tag">variados · importados</span></div>
+<div class="grid grid-5">
+  <div class="ccard" style="--cc:var(--cyan)">
+    <div class="cc-top"><div class="cc-model">🇮🇹 Fiat 500e</div><div class="cc-price">~R$200–230k</div></div>
+    <div class="cc-specs"><span class="chip">Hatch retro</span><span class="chip c">85 kW DC</span><span class="chip g">~320 km</span><span class="chip">118 cv</span></div>
+  </div>
+  <div class="ccard" style="--cc:var(--cyan)">
+    <div class="cc-top"><div class="cc-model">🇮🇹 Fiat E-Scudo</div><div class="cc-price">~R$250k</div></div>
+    <div class="cc-specs"><span class="chip">Utilitário</span><span class="chip c">100 kW DC</span><span class="chip g">~330 km</span><span class="chip">136 cv</span></div>
+  </div>
+  <div class="ccard" style="--cc:var(--amber)">
+    <div class="cc-top"><div class="cc-model">🇺🇸 Tesla Model 3</div><div class="cc-price">~R$280–380k</div></div>
+    <div class="cc-specs"><span class="chip">Sedã</span><span class="chip c">250 kW SC</span><span class="chip g">~550 km</span><span class="chip">Supercharger</span></div>
+  </div>
+  <div class="ccard" style="--cc:var(--amber)">
+    <div class="cc-top"><div class="cc-model">🇺🇸 Tesla Model Y</div><div class="cc-price">~R$320–420k</div></div>
+    <div class="cc-specs"><span class="chip">SUV</span><span class="chip c">250 kW SC</span><span class="chip g">~530 km</span><span class="chip">Supercharger</span></div>
+  </div>
+  <div class="ccard" style="--cc:var(--amber)">
+    <div class="cc-top"><div class="cc-model">🇬🇧 Mini Cooper SE</div><div class="cc-price">~R$200–240k</div></div>
+    <div class="cc-specs"><span class="chip">Hatch premium</span><span class="chip c">95 kW DC</span><span class="chip a">~230 km</span><span class="chip">184 cv</span></div>
+  </div>
+  <div class="ccard" style="--cc:var(--cyan)">
+    <div class="cc-top"><div class="cc-model">🇯🇵 Nissan Leaf</div><div class="cc-price">~R$180–220k</div></div>
+    <div class="cc-specs"><span class="chip">Hatch</span><span class="chip c">50 kW DC</span><span class="chip a">~270 km</span><span class="chip">150–217 cv</span></div>
+  </div>
+  <div class="ccard" style="--cc:var(--amber)">
+    <div class="cc-top"><div class="cc-model">🇩🇪 Porsche Macan EV</div><div class="cc-price">R$540k–700k</div></div>
+    <div class="cc-specs"><span class="chip">SUV Sport</span><span class="chip c">270 kW DC 🥇</span><span class="chip g">~600 km WLTP</span><span class="chip">408–639 cv</span></div>
+  </div>
+</div>
+</div>
+
+<div class="note"><strong>Fontes:</strong> ABVE/INMETRO mar-abr 2026 · sites oficiais das marcas · dados de preço de tabela, sujeitos a variações regionais, PCD, CNPJ e promoções. Tesla opera sem concessionária oficial consolidada no Brasil. <strong>Autonomias "cidade"</strong> = ciclo INMETRO. WLTP e CLTC são ciclos internacionais geralmente mais otimistas. Preços de modelos premium e recém-chegados são estimativas baseadas em concessionárias e importação.</div>
+</div>
+
+<!-- ═══════════════ BYD ═══════════════ -->
+<div id="pg-byd" class="page">
+<div class="ph"><div class="eyebrow">Líder absoluto · 70,7% do mercado</div><h2>Linha BYD Completa<br>Brasil 2026–2027</h2><p>Camaçari/BA · dados abr/2026 · inclui lançamentos 06/04/2026</p></div>
+<div class="stats">
+  <div class="stat"><div class="sn">7.053</div><div class="sl">Dolphin Mini Mar</div></div>
+  <div class="stat"><div class="sn">8</div><div class="sl">Modelos BEV+</div></div>
+  <div class="stat"><div class="sn">R$99k</div><div class="sl">Entrada</div></div>
+  <div class="stat"><div class="sn">530 km</div><div class="sl">Máx. Autonomia</div></div>
+</div>
+<div class="grid">
+  <!-- reutiliza os mesmos cards do Todos -->
+  <div class="card" style="--cc:var(--cyan)"><div class="cb">Entrada · Mini</div><div class="cm">Dolphin Mini GL 2026</div><div class="cp">R$ 99.990<small>30 kWh LFP · bateria menor</small></div><div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:42%"></div></div><span class="bk a">~210 km</span></div><div class="sp"><div class="sv"><div class="sl2">Bateria</div><div class="sv2">30 kWh LFP</div></div><div class="sv"><div class="sl2">Carga DC</div><div class="sv2 g">40 kW DC</div></div><div class="sv"><div class="sl2">Potência</div><div class="sv2">75 cv</div></div><div class="sv"><div class="sl2">Nacional?</div><div class="sv2 g">Sim – BA</div></div></div><div class="ft"><span><span class="dot dg"></span>DC</span><span class="vs">Mais barato EV BR</span></div></div>
+
+  <div class="card" style="--cc:var(--cyan)"><div class="bdg bdg-g">+Vendido BR</div><div class="cb">Entrada · Std</div><div class="cm">Dolphin Mini 38 kWh</div><div class="cp">R$ 119.990<small>38 kWh · 50% mkt share elétricos mar/26</small></div><div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:56%"></div></div><span class="bk g">280 km</span></div><div class="sp"><div class="sv"><div class="sl2">Bateria</div><div class="sv2">38 kWh LFP Blade</div></div><div class="sv"><div class="sl2">Carga DC</div><div class="sv2 g">40 kW · 22 min</div></div><div class="sv"><div class="sl2">Potência</div><div class="sv2">75 cv</div></div><div class="sv"><div class="sl2">Garantia</div><div class="sv2 g">6a sem limite km</div></div></div><div class="ft"><span><span class="dot dg"></span>40 kW DC</span><span class="vs">7.053 un mar/26</span></div></div>
+
+  <div class="card" style="--cc:var(--cyan)"><div class="cb">Hatch · Compacto</div><div class="cm">Dolphin GS 2026</div><div class="cp">R$ 149.990<small>44,9 kWh · 60 kW DC · nacional BA</small></div><div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:58%"></div></div><span class="bk g">291 km</span></div><div class="sp"><div class="sv"><div class="sl2">Bateria</div><div class="sv2">44,9 kWh Blade</div></div><div class="sv"><div class="sl2">Carga DC</div><div class="sv2 g">60 kW DC</div></div><div class="sv"><div class="sl2">Potência</div><div class="sv2">95 cv</div></div><div class="sv"><div class="sl2">Nacional?</div><div class="sv2 g">Sim – BA</div></div></div><div class="ft"><span><span class="dot dg"></span>60 kW DC</span><span class="vs">vs. Spark EUV</span></div></div>
+
+  <div class="card" style="--cc:var(--cyan)"><div class="bdg bdg-n">NOVO 2027</div><div class="cb">Hatch · Special Ed.</div><div class="cm">Dolphin SE 2027</div><div class="cp">R$ 159.990<small>lançado 06/04/2026 · 177 cv · design novo</small></div><div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:75%"></div></div><span class="bk g">405 km</span></div><div class="sp"><div class="sv"><div class="sl2">Bateria</div><div class="sv2">45,12 kWh</div></div><div class="sv"><div class="sl2">Carga DC</div><div class="sv2 g">80 kW · 20 min</div></div><div class="sv"><div class="sl2">Potência</div><div class="sv2 c">177 cv</div></div><div class="sv"><div class="sl2">0–100</div><div class="sv2">8 s</div></div></div><div class="ft"><span><span class="dot dg"></span>80 kW DC</span><span class="vs">vs. ORA 03</span></div></div>
+
+  <div class="card" style="--cc:var(--cyan)"><div class="cb">Hatch · Top</div><div class="cm">Dolphin Plus 2026</div><div class="cp">R$ 184.800<small>74,88 kWh · maior hatch BYD</small></div><div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:88%"></div></div><span class="bk c">530 km</span></div><div class="sp"><div class="sv"><div class="sl2">Bateria</div><div class="sv2">74,88 kWh Blade</div></div><div class="sv"><div class="sl2">Carga DC</div><div class="sv2 c">80 kW · 20 min</div></div><div class="sv"><div class="sl2">Potência</div><div class="sv2">204 cv</div></div><div class="sv"><div class="sl2">Nacional?</div><div class="sv2 g">Sim – BA</div></div></div><div class="ft"><span><span class="dot dg"></span>80 kW DC</span><span class="vs">vs. EX5 Pro</span></div></div>
+
+  <div class="card" style="--cc:var(--green)"><div class="cb">SUV · Compacto</div><div class="cm">Yuan Pro 2026</div><div class="cp">R$ 182.990<small>60,4 kWh · nacional BA</small></div><div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:50%;background:linear-gradient(90deg,var(--green),rgba(0,232,122,.2))"></div></div><span class="bk a">250 km</span></div><div class="sp"><div class="sv"><div class="sl2">Bateria</div><div class="sv2">60,4 kWh Blade</div></div><div class="sv"><div class="sl2">Carga DC</div><div class="sv2 g">DC disponível</div></div><div class="sv"><div class="sl2">Potência</div><div class="sv2">177 cv</div></div><div class="sv"><div class="sl2">Garantia</div><div class="sv2 g">6a / 8 bat.</div></div></div><div class="ft"><span><span class="dot dg"></span>DC disponível</span><span class="vs">vs. EX5 Pro</span></div></div>
+
+  <div class="card" style="--cc:var(--green)"><div class="bdg bdg-n">NOVO 2027</div><div class="cb">SUV · AWD 449 cv</div><div class="cm">Yuan Plus AWD 2027</div><div class="cp">R$ 269.990<small>lançado 06/04/2026 · 800V · 20 min</small></div><div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:88%;background:linear-gradient(90deg,var(--green),rgba(0,232,122,.2))"></div></div><span class="bk c">530 km</span></div><div class="sp"><div class="sv"><div class="sl2">Bateria</div><div class="sv2">74,88 kWh Blade</div></div><div class="sv"><div class="sl2">Carga DC</div><div class="sv2 c">800V · 20 min</div></div><div class="sv"><div class="sl2">Potência</div><div class="sv2 c">449 cv AWD</div></div><div class="sv"><div class="sl2">0–100</div><div class="sv2 c">3,9 s</div></div></div><div class="ft"><span><span class="dot dg"></span>800V ultrarrápido</span><span class="vs">vs. Zeekr 7X · Macan</span></div></div>
+
+  <div class="card" style="--cc:var(--green)"><div class="cb">Sedã · Esportivo</div><div class="cm">Seal 2026</div><div class="cp">R$ 219.800 – R$ 249.800<small>Dynamic · Performance AWD · nacional BA</small></div><div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:83%;background:linear-gradient(90deg,var(--green),rgba(0,232,122,.2))"></div></div><span class="bk g">~430 km</span></div><div class="sp"><div class="sv"><div class="sl2">Bateria</div><div class="sv2">82,5 kWh Blade</div></div><div class="sv"><div class="sl2">Carga DC</div><div class="sv2 c">150 kW DC</div></div><div class="sv"><div class="sl2">Potência</div><div class="sv2 c">313–530 cv</div></div><div class="sv"><div class="sl2">0–100</div><div class="sv2 c">3,8 s AWD</div></div></div><div class="ft"><span><span class="dot dg"></span>150 kW DC</span><span class="vs">vs. EX30 · i4</span></div></div>
+
+  <div class="card" style="--cc:var(--amber)"><div class="cb">SUV · 7 Lugares</div><div class="cm">Tan 2026</div><div class="cp">~R$ 420.000<small>108,8 kWh · 517 cv AWD · 7 lugares · importado</small></div><div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:82%;background:linear-gradient(90deg,var(--amber),rgba(255,184,0,.2))"></div></div><span class="bk g">~415 km</span></div><div class="sp"><div class="sv"><div class="sl2">Bateria</div><div class="sv2">108,8 kWh Blade</div></div><div class="sv"><div class="sl2">Carga DC</div><div class="sv2 c">110 kW DC</div></div><div class="sv"><div class="sl2">Potência</div><div class="sv2 c">517 cv AWD</div></div><div class="sv"><div class="sl2">Lugares</div><div class="sv2 g">7</div></div></div><div class="ft"><span><span class="dot dg"></span>110 kW DC</span><span class="vs">vs. EX90 · EQS SUV</span></div></div>
+
+  <div class="card" style="--cc:var(--violet)"><div class="cb">Denza (BYD) · PHEV Luxo</div><div class="cm">Denza B5 2026</div><div class="cp">~R$ 500.000<small>1.5T + 2 elétricos · 680 cv · ~1.200 km total</small></div><div class="br"><span class="bl">EV</span><div class="bb"><div class="bf" style="width:24%;background:linear-gradient(90deg,var(--violet),rgba(168,85,247,.2))"></div></div><span class="bk v">125 km EV</span></div><div class="sp"><div class="sv"><div class="sl2">Tipo</div><div class="sv2 v">PHEV SUV</div></div><div class="sv"><div class="sl2">Auto. total</div><div class="sv2 g">~1.200 km</div></div><div class="sv"><div class="sl2">Potência</div><div class="sv2 v">680 cv</div></div><div class="sv"><div class="sl2">0–100</div><div class="sv2 v">4,8 s</div></div></div><div class="ft"><span><span class="dot" style="background:var(--violet)"></span>PHEV · 1.200 km total</span><span class="vs">vs. Q8 e-tron</span></div></div>
+</div>
+<div class="note"><strong>Estratégia BYD no Brasil:</strong> A montadora produz em Camaçari/BA e domina com 70,7% do mercado EV. O <strong>Dolphin Mini</strong> representou 50,33% de TODOS os elétricos vendidos em março/2026. Os lançamentos de 06/04/2026 — <strong>Dolphin SE</strong> (R$159.990) e <strong>Yuan Plus AWD</strong> (R$269.990) — mostram a estratégia de cobrir todos os segmentos: de R$99k até R$500k+.</div>
+</div>
+
+<!-- ═══════════════ CHINESES ═══════════════ -->
+<div id="pg-chineses" class="page">
+<div class="ph"><div class="eyebrow">Outros fabricantes</div><h2>Marcas Chinesas<br>no Brasil 2026</h2><p>Geely · GWM/ORA · GAC Aion · Leapmotor · Zeekr · MG · Omoda · Neta · JAC</p></div>
+<div class="stats">
+  <div class="stat"><div class="sn">9+</div><div class="sl">Marcas chinesas</div></div>
+  <div class="stat"><div class="sn">20+</div><div class="sl">Modelos</div></div>
+  <div class="stat"><div class="sn">R$99k</div><div class="sl">Mín. Geely EX2</div></div>
+</div>
+
+<!-- GEELY -->
+<div class="brand-sec">
+<div class="brand-hdr"><span class="brand-flag">🇨🇳</span><span class="brand-name">Geely</span><div class="brand-line"></div><span class="brand-tag">2ª+ vendida · fábrica chegando PR</span></div>
+<div class="grid">
+  <div class="card" style="--cc:var(--cyan)"><div class="cb">Hatch · Destaque</div><div class="cm">EX2 Pro / Max 2026</div><div class="cp">R$ 123.800 – R$ 136.800<small>70 kW DC em 21 min · fila 3 meses · importado</small></div><div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:58%"></div></div><span class="bk g">289 km</span></div><div class="sp"><div class="sv"><div class="sl2">Bateria</div><div class="sv2">39,4 kWh LFP</div></div><div class="sv"><div class="sl2">Carga DC</div><div class="sv2 c">70 kW · 21 min</div></div><div class="sv"><div class="sl2">Potência</div><div class="sv2 c">116 cv</div></div><div class="sv"><div class="sl2">Porta-malas</div><div class="sv2 g">375 L + frunk</div></div></div><div class="ft"><span><span class="dot dg"></span>70 kW DC</span><span class="vs">vs. Dolphin Mini</span></div></div>
+  <div class="card" style="--cc:var(--green)"><div class="cb">SUV · Médio</div><div class="cm">EX5 Pro / Max 2026</div><div class="cp">R$ 195.800 – R$ 225.800<small>413 km INMETRO · mais barato que HR-V top</small></div><div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:83%;background:linear-gradient(90deg,var(--green),rgba(0,232,122,.2))"></div></div><span class="bk g">413 km</span></div><div class="sp"><div class="sv"><div class="sl2">Bateria</div><div class="sv2">60,22 kWh LFP</div></div><div class="sv"><div class="sl2">Carga DC</div><div class="sv2 g">20 min 30→80%</div></div><div class="sv"><div class="sl2">Potência</div><div class="sv2 c">218 cv</div></div><div class="sv"><div class="sl2">Dimensão</div><div class="sv2">4,79m SUV</div></div></div><div class="ft"><span><span class="dot dg"></span>DC 20 min</span><span class="vs">vs. Yuan Pro · Aion V</span></div></div>
+</div>
+</div>
+
+<!-- GWM -->
+<div class="brand-sec">
+<div class="brand-hdr"><span class="brand-flag">🇨🇳</span><span class="brand-name">GWM / ORA</span><div class="brand-line"></div><span class="brand-tag">Iracemápolis/SP · retrô premium</span></div>
+<div class="grid">
+  <div class="card" style="--cc:var(--green)"><div class="cb">Hatch Retrô · 48 kWh</div><div class="cm">ORA 03 Skin BEV48</div><div class="cp">R$ 169.000<small>48 kWh · estilo exclusivo · 7 airbags</small></div><div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:46%;background:linear-gradient(90deg,var(--green),rgba(0,232,122,.2))"></div></div><span class="bk a">232 km</span></div><div class="sp"><div class="sv"><div class="sl2">Bateria</div><div class="sv2">48 kWh</div></div><div class="sv"><div class="sl2">Carga DC</div><div class="sv2 g">DC · 30 min</div></div><div class="sv"><div class="sl2">Potência</div><div class="sv2">171 cv</div></div><div class="sv"><div class="sl2">ADAS</div><div class="sv2 g">Nível 2+</div></div></div><div class="ft"><span><span class="dot dg"></span>DC · retrô único</span><span class="vs">vs. Dolphin GS</span></div></div>
+  <div class="card" style="--cc:var(--green)"><div class="cb">Hatch Retrô · 63 kWh</div><div class="cm">ORA 03 GT BEV63</div><div class="cp">R$ 169.000 – R$ 199.000<small>63 kWh · teto solar panorâmico · ADAS full</small></div><div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:58%;background:linear-gradient(90deg,var(--green),rgba(0,232,122,.2))"></div></div><span class="bk g">295 km</span></div><div class="sp"><div class="sv"><div class="sl2">Bateria</div><div class="sv2">63 kWh</div></div><div class="sv"><div class="sl2">Carga DC</div><div class="sv2 g">DC disponível</div></div><div class="sv"><div class="sl2">Potência</div><div class="sv2">171 cv</div></div><div class="sv"><div class="sl2">WLTP</div><div class="sv2 c">~420 km</div></div></div><div class="ft"><span><span class="dot dg"></span>DC · teto solar</span><span class="vs">vs. BYD Seal</span></div></div>
+</div>
+</div>
+
+<!-- GAC -->
+<div class="brand-sec">
+<div class="brand-hdr"><span class="brand-flag">🇨🇳</span><span class="brand-name">GAC Aion</span><div class="brand-line"></div><span class="brand-tag">~R$200k · importado</span></div>
+<div class="grid">
+  <div class="card" style="--cc:var(--blue)"><div class="cb">Hatch</div><div class="cm">Aion Y 2026</div><div class="cp">~R$ 175.000<small>crossover compacto</small></div><div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:52%;background:linear-gradient(90deg,var(--blue),rgba(59,130,246,.2))"></div></div><span class="bk">~260 km</span></div><div class="sp"><div class="sv"><div class="sl2">Bateria</div><div class="sv2">45 kWh LFP</div></div><div class="sv"><div class="sl2">Carga DC</div><div class="sv2 g">DC disponível</div></div><div class="sv"><div class="sl2">Potência</div><div class="sv2">136 cv</div></div><div class="sv"><div class="sl2">Nacional?</div><div class="sv2 r">Não</div></div></div><div class="ft"><span><span class="dot dg"></span>DC disponível</span><span class="vs">vs. ORA · Dolphin</span></div></div>
+  <div class="card" style="--cc:var(--blue)"><div class="cb">SUV Médio</div><div class="cm">Aion V 2026</div><div class="cp">~R$ 200.000<small>rival direto EX5 · ~500 km autonomia</small></div><div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:80%;background:linear-gradient(90deg,var(--blue),rgba(59,130,246,.2))"></div></div><span class="bk g">~500 km</span></div><div class="sp"><div class="sv"><div class="sl2">Bateria</div><div class="sv2">~70 kWh LFP</div></div><div class="sv"><div class="sl2">Carga DC</div><div class="sv2 g">DC disponível</div></div><div class="sv"><div class="sl2">Potência</div><div class="sv2 c">204 cv</div></div><div class="sv"><div class="sl2">Nacional?</div><div class="sv2 r">Não</div></div></div><div class="ft"><span><span class="dot dg"></span>DC disponível</span><span class="vs">vs. EX5 · Yuan Pro</span></div></div>
+</div>
+</div>
+
+<!-- ZEEKR -->
+<div class="brand-sec">
+<div class="brand-hdr"><span class="brand-flag">🇨🇳</span><span class="brand-name">Zeekr (Geely Group)</span><div class="brand-line"></div><span class="brand-tag">premium chinês</span></div>
+<div class="grid">
+  <div class="card" style="--cc:var(--amber)"><div class="cb">SUV Compacto</div><div class="cm">Zeekr X 2026</div><div class="cp">~R$ 220.000 – R$ 260.000<small>66 kWh · 315 cv AWD · 150 kW DC</small></div><div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:68%;background:linear-gradient(90deg,var(--amber),rgba(255,184,0,.2))"></div></div><span class="bk g">~395 km</span></div><div class="sp"><div class="sv"><div class="sl2">Bateria</div><div class="sv2">66 kWh NMC</div></div><div class="sv"><div class="sl2">Carga DC</div><div class="sv2 c">150 kW DC</div></div><div class="sv"><div class="sl2">Potência</div><div class="sv2 c">315 cv AWD</div></div><div class="sv"><div class="sl2">0–100</div><div class="sv2 c">3,8 s</div></div></div><div class="ft"><span><span class="dot dg"></span>150 kW DC</span><span class="vs">vs. EX30 · iX1</span></div></div>
+  <div class="card" style="--cc:var(--amber)"><div class="cb">Sedã / Fastback</div><div class="cm">Zeekr 001 2026</div><div class="cp">~R$ 380.000 – R$ 420.000<small>vendas limitadas · 100 kWh · 544 cv AWD</small></div><div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:97%;background:linear-gradient(90deg,var(--amber),rgba(255,184,0,.2))"></div></div><span class="bk c">~750 km</span></div><div class="sp"><div class="sv"><div class="sl2">Bateria</div><div class="sv2">100 kWh NMC</div></div><div class="sv"><div class="sl2">Carga DC</div><div class="sv2 c">200+ kW DC</div></div><div class="sv"><div class="sl2">Potência</div><div class="sv2 c">544 cv AWD</div></div><div class="sv"><div class="sl2">0–100</div><div class="sv2 c">3,8 s</div></div></div><div class="ft"><span><span class="dot dg"></span>200+ kW DC</span><span class="vs">vs. i4 · Seal</span></div></div>
+  <div class="card" style="--cc:var(--amber)"><div class="cb">SUV Premium</div><div class="cm">Zeekr 7X 2026</div><div class="cp">R$ 350.000 – R$ 390.000<small>75–100 kWh · 544 cv · 200+ kW DC</small></div><div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:90%;background:linear-gradient(90deg,var(--amber),rgba(255,184,0,.2))"></div></div><span class="bk g">~550 km</span></div><div class="sp"><div class="sv"><div class="sl2">Bateria</div><div class="sv2">75–100 kWh NMC</div></div><div class="sv"><div class="sl2">Carga DC</div><div class="sv2 c">200+ kW DC</div></div><div class="sv"><div class="sl2">Potência</div><div class="sv2 c">544 cv AWD</div></div><div class="sv"><div class="sl2">0–100</div><div class="sv2 c">3,8 s</div></div></div><div class="ft"><span><span class="dot dg"></span>200+ kW DC</span><span class="vs">vs. Equinox · Macan</span></div></div>
+</div>
+</div>
+</div>
+
+<!-- ═══════════════ EUROPEUS ═══════════════ -->
+<div id="pg-europeus" class="page">
+<div class="ph"><div class="eyebrow">Marcas Premium</div><h2>Europeus Elétricos<br>no Brasil 2026</h2><p>Volvo · BMW · Audi · Mercedes · Renault · Fiat · Mini · Porsche</p></div>
+<div class="stats">
+  <div class="stat"><div class="sn">8</div><div class="sl">Marcas EU</div></div>
+  <div class="stat"><div class="sn">R$99k</div><div class="sl">Entrada Renault</div></div>
+  <div class="stat"><div class="sn">R$849k</div><div class="sl">Topo Volvo EX90</div></div>
+  <div class="stat"><div class="sn">~R$1,4M</div><div class="sl">BMW i7 Topo</div></div>
+</div>
+
+<div class="brand-sec">
+<div class="brand-hdr"><span class="brand-flag">🇸🇪</span><span class="brand-name">Volvo</span><div class="brand-line"></div></div>
+<div class="grid">
+  <div class="card" style="--cc:var(--amber)"><div class="bdg bdg-g">+Vendido Volvo</div><div class="cb">Mini-SUV · Premium</div><div class="cm">EX30 2026</div><div class="cp">R$ 229.950 – R$ 249.950</div><div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:66%;background:linear-gradient(90deg,var(--amber),rgba(255,184,0,.2))"></div></div><span class="bk g">250–338 km</span></div><div class="sp"><div class="sv"><div class="sl2">Bateria</div><div class="sv2">51–69 kWh NMC</div></div><div class="sv"><div class="sl2">Carga DC</div><div class="sv2 c">153 kW · 26 min</div></div><div class="sv"><div class="sl2">Potência</div><div class="sv2 c">203–272 cv</div></div><div class="sv"><div class="sl2">0–100</div><div class="sv2 c">3,6 s Twin</div></div></div><div class="ft"><span><span class="dot dg"></span>153 kW DC</span><span class="vs">vs. BYD Seal</span></div></div>
+  <div class="card" style="--cc:var(--amber)"><div class="cb">SUV / Coupé · Médio</div><div class="cm">EX40 / EC40 2026</div><div class="cp">R$ 320.000 – R$ 360.000</div><div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:87%;background:linear-gradient(90deg,var(--amber),rgba(255,184,0,.2))"></div></div><span class="bk g">~500 km</span></div><div class="sp"><div class="sv"><div class="sl2">Bateria</div><div class="sv2">82 kWh NMC</div></div><div class="sv"><div class="sl2">Carga DC</div><div class="sv2 c">150 kW DC</div></div><div class="sv"><div class="sl2">Potência</div><div class="sv2 c">231–408 cv</div></div><div class="sv"><div class="sl2">0–100</div><div class="sv2 c">4,7 s AWD</div></div></div><div class="ft"><span><span class="dot dg"></span>150 kW DC</span><span class="vs">vs. Equinox EV</span></div></div>
+  <div class="card" style="--cc:var(--amber)"><div class="cb">SUV Grande · 7 Lug.</div><div class="cm">EX90 2026</div><div class="cp">R$ 849.950<small>LiDAR · SafetyCar Volvo</small></div><div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:93%;background:linear-gradient(90deg,var(--amber),rgba(255,184,0,.2))"></div></div><span class="bk c">459 km</span></div><div class="sp"><div class="sv"><div class="sl2">Bateria</div><div class="sv2">111 kWh NMC</div></div><div class="sv"><div class="sl2">Carga DC</div><div class="sv2 c">250 kW DC</div></div><div class="sv"><div class="sl2">Potência</div><div class="sv2 c">517 cv AWD</div></div><div class="sv"><div class="sl2">Lugares</div><div class="sv2 g">7</div></div></div><div class="ft"><span><span class="dot dg"></span>250 kW DC · LiDAR</span><span class="vs">vs. BMW iX · EQS</span></div></div>
+</div>
+</div>
+
+<div class="brand-sec">
+<div class="brand-hdr"><span class="brand-flag">🇩🇪</span><span class="brand-name">BMW</span><div class="brand-line"></div></div>
+<div class="grid">
+  <div class="card" style="--cc:var(--amber)"><div class="cb">SUV Compacto</div><div class="cm">iX1 xDrive30 2026</div><div class="cp">R$ 383.950<small>M Sport · 64,7 kWh · 313 cv AWD</small></div><div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:72%;background:linear-gradient(90deg,var(--amber),rgba(255,184,0,.2))"></div></div><span class="bk g">~438 km</span></div><div class="sp"><div class="sv"><div class="sl2">Bateria</div><div class="sv2">64,7 kWh NMC</div></div><div class="sv"><div class="sl2">Carga DC</div><div class="sv2 c">130 kW DC</div></div><div class="sv"><div class="sl2">Potência</div><div class="sv2 c">313 cv AWD</div></div><div class="sv"><div class="sl2">0–100</div><div class="sv2 c">5,6 s</div></div></div><div class="ft"><span><span class="dot dg"></span>130 kW DC</span><span class="vs">vs. EX30 · iX2</span></div></div>
+  <div class="card" style="--cc:var(--amber)"><div class="cb">SUV Médio</div><div class="cm">iX2 xDrive30 2026</div><div class="cp">R$ 495.950<small>M Sport · coupé · 313 cv AWD</small></div><div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:75%;background:linear-gradient(90deg,var(--amber),rgba(255,184,0,.2))"></div></div><span class="bk g">~450 km</span></div><div class="sp"><div class="sv"><div class="sl2">Bateria</div><div class="sv2">~66 kWh NMC</div></div><div class="sv"><div class="sl2">Carga DC</div><div class="sv2 c">130 kW DC</div></div><div class="sv"><div class="sl2">Potência</div><div class="sv2 c">313 cv AWD</div></div><div class="sv"><div class="sl2">Carroceria</div><div class="sv2">SUV-Coupé</div></div></div><div class="ft"><span><span class="dot dg"></span>130 kW DC</span><span class="vs">vs. EX40 · EC40</span></div></div>
+  <div class="card" style="--cc:var(--amber)"><div class="cb">Sedã Esportivo</div><div class="cm">i4 eDrive40 / M50 2026</div><div class="cp">R$ 582.950 – R$ 675.950<small>83,9 kWh · 340–544 cv · 210 kW DC</small></div><div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:85%;background:linear-gradient(90deg,var(--amber),rgba(255,184,0,.2))"></div></div><span class="bk g">~460 km</span></div><div class="sp"><div class="sv"><div class="sl2">Bateria</div><div class="sv2">83,9 kWh NMC</div></div><div class="sv"><div class="sl2">Carga DC</div><div class="sv2 c">210 kW DC</div></div><div class="sv"><div class="sl2">Potência</div><div class="sv2 c">340–544 cv</div></div><div class="sv"><div class="sl2">0–100</div><div class="sv2 c">3,9 s M50</div></div></div><div class="ft"><span><span class="dot dg"></span>210 kW DC</span><span class="vs">vs. Zeekr 001</span></div></div>
+  <div class="card" style="--cc:var(--amber)"><div class="bdg bdg-g">Maior Auto. BR</div><div class="cb">SUV Grande</div><div class="cm">iX xDrive50 2026</div><div class="cp">~R$ 750.000 – R$ 900.000<small>528 km INMETRO · maior auto. BR entre SUVs</small></div><div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:100%;background:linear-gradient(90deg,var(--amber),rgba(255,184,0,.2))"></div></div><span class="bk c">528 km 🥇</span></div><div class="sp"><div class="sv"><div class="sl2">Bateria</div><div class="sv2">111,5 kWh NMC</div></div><div class="sv"><div class="sl2">Carga DC</div><div class="sv2 c">200 kW DC</div></div><div class="sv"><div class="sl2">Potência</div><div class="sv2 c">523 cv AWD</div></div><div class="sv"><div class="sl2">0–100</div><div class="sv2 c">4,6 s</div></div></div><div class="ft"><span><span class="dot dg"></span>200 kW DC</span><span class="vs">vs. EX90 · EQS SUV</span></div></div>
+  <div class="card" style="--cc:var(--violet)"><div class="bdg bdg-v">Chegando 2026</div><div class="cb">Neue Klasse · 800V</div><div class="cm">iX3 2026</div><div class="cp">~R$ 500.000+<small>800V · 400 kW DC · 805 km WLTP · homologação</small></div><div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:100%;background:linear-gradient(90deg,var(--violet),rgba(168,85,247,.2))"></div></div><span class="bk v">805 km WLTP</span></div><div class="sp"><div class="sv"><div class="sl2">Plataforma</div><div class="sv2 v">Neue Klasse</div></div><div class="sv"><div class="sl2">Carga DC</div><div class="sv2 v">400 kW</div></div><div class="sv"><div class="sl2">Potência</div><div class="sv2 c">469 cv</div></div><div class="sv"><div class="sl2">Status</div><div class="sv2 v">Homologação BR</div></div></div><div class="ft"><span><span class="dot" style="background:var(--violet)"></span>400 kW · gen. completamente nova</span><span class="vs">2º sem. 2026</span></div></div>
+</div>
+</div>
+</div>
+
+<!-- ═══════════════ AMERICANOS ═══════════════ -->
+<div id="pg-americanos" class="page">
+<div class="ph"><div class="eyebrow">Montadoras EUA</div><h2>Chevrolet & Tesla<br>no Brasil 2026</h2><p>Chevrolet: 4 modelos oficiais · Tesla: importação independente</p></div>
+<div class="stats">
+  <div class="stat"><div class="sn">4</div><div class="sl">Chevy BEV</div></div>
+  <div class="stat"><div class="sn">481 km</div><div class="sl">Máx. Blazer EV</div></div>
+  <div class="stat"><div class="sn">2</div><div class="sl">Tesla modelos</div></div>
+  <div class="stat"><div class="sn">250 kW</div><div class="sl">Supercharger</div></div>
+</div>
+
+<div class="brand-sec">
+<div class="brand-hdr"><span class="brand-flag">🇺🇸</span><span class="brand-name">Chevrolet</span><div class="brand-line"></div><span class="brand-tag">2 plataformas: chinesa + Ultium</span></div>
+<div class="grid">
+  <div class="card" style="--cc:var(--cyan)"><div class="cb">Entrada · Nacional CE</div><div class="cm">Spark EUV 2026</div><div class="cp">R$ 154.990<small>mini-SUV · base Baojun · ADAS completo de série</small></div><div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:52%"></div></div><span class="bk a">258 km</span></div><div class="sp"><div class="sv"><div class="sl2">Bateria</div><div class="sv2">42 kWh LFP</div></div><div class="sv"><div class="sl2">Carga DC</div><div class="sv2 a">DC · 35 min</div></div><div class="sv"><div class="sl2">Potência</div><div class="sv2">101 cv</div></div><div class="sv"><div class="sl2">ADAS</div><div class="sv2 g">Completo série</div></div></div><div class="ft"><span><span class="dot dg"></span>DC disponível</span><span class="vs">vs. Dolphin GS</span></div></div>
+  <div class="card" style="--cc:var(--green)"><div class="bdg bdg-v">Chegando 2026</div><div class="cb">SUV · Wuling</div><div class="cm">Captiva EV 2026</div><div class="cp">~R$ 200.000<small>60 kWh · ~350 km · base Wuling Starlight S</small></div><div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:70%;background:linear-gradient(90deg,var(--green),rgba(0,232,122,.2))"></div></div><span class="bk g">~350 km</span></div><div class="sp"><div class="sv"><div class="sl2">Bateria</div><div class="sv2">60 kWh LFP</div></div><div class="sv"><div class="sl2">Carga DC</div><div class="sv2 g">DC disponível</div></div><div class="sv"><div class="sl2">Potência</div><div class="sv2">204 cv</div></div><div class="sv"><div class="sl2">Status</div><div class="sv2 a">Lançamento 2026</div></div></div><div class="ft"><span><span class="dot dg"></span>DC disponível</span><span class="vs">vs. EX5 · Yuan Pro</span></div></div>
+  <div class="card" style="--cc:var(--amber)"><div class="cb">SUV Médio · Ultium</div><div class="cm">Equinox EV RS 2026</div><div class="cp">R$ 349.990<small>rebaixado de R$419k · 85 kWh · 443 km INMETRO</small></div><div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:91%;background:linear-gradient(90deg,var(--amber),rgba(255,184,0,.2))"></div></div><span class="bk c">443 km</span></div><div class="sp"><div class="sv"><div class="sl2">Bateria</div><div class="sv2">85 kWh Ultium</div></div><div class="sv"><div class="sl2">Carga DC</div><div class="sv2 c">150 kW DC</div></div><div class="sv"><div class="sl2">Potência</div><div class="sv2 c">292 cv eAWD</div></div><div class="sv"><div class="sl2">Tela</div><div class="sv2 c">17,7" Google</div></div></div><div class="ft"><span><span class="dot dg"></span>150 kW DC</span><span class="vs">vs. EX40 · Zeekr 7X</span></div></div>
+  <div class="card" style="--cc:var(--red)"><div class="bdg bdg-g">Maior Auto. GM</div><div class="cb">SUV Topo · Ultium</div><div class="cm">Blazer EV RS 2026</div><div class="cp">R$ 503.190<small>102 kWh · AWD · 481 km INMETRO 🥇</small></div><div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:100%;background:linear-gradient(90deg,var(--red),rgba(255,77,77,.2))"></div></div><span class="bk c">481 km 🥇</span></div><div class="sp"><div class="sv"><div class="sl2">Bateria</div><div class="sv2">102 kWh Ultium</div></div><div class="sv"><div class="sl2">Carga DC</div><div class="sv2 c">190 kW DC</div></div><div class="sv"><div class="sl2">Potência</div><div class="sv2 c">347 cv</div></div><div class="sv"><div class="sl2">Tela</div><div class="sv2 c">17,7" Google</div></div></div><div class="ft"><span><span class="dot dg"></span>190 kW DC</span><span class="vs">vs. EX90 · Macan</span></div></div>
+</div>
+</div>
+
+<div class="brand-sec">
+<div class="brand-hdr"><span class="brand-flag">🇺🇸</span><span class="brand-name">Tesla</span><div class="brand-line"></div><span class="brand-tag">sem operação oficial · importação independente</span></div>
+<div class="grid">
+  <div class="card" style="--cc:var(--red)"><div class="cb">Tesla · Sedã</div><div class="cm">Model 3 2026</div><div class="cp">~R$ 280.000 – R$ 380.000<small>importado · Supercharger 250 kW · sem concess. oficial</small></div><div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:90%;background:linear-gradient(90deg,var(--red),rgba(255,77,77,.2))"></div></div><span class="bk c">~550 km</span></div><div class="sp"><div class="sv"><div class="sl2">Bateria</div><div class="sv2">60–82 kWh NMC</div></div><div class="sv"><div class="sl2">Supercharger</div><div class="sv2 c">250 kW DC</div></div><div class="sv"><div class="sl2">Potência</div><div class="sv2 c">283–476 cv</div></div><div class="sv"><div class="sl2">0–100</div><div class="sv2 c">3,1 s (P)</div></div></div><div class="ft"><span><span class="dot dg"></span>250 kW Supercharger</span><span class="vs">vs. BMW i4 · Seal</span></div></div>
+  <div class="card" style="--cc:var(--red)"><div class="cb">Tesla · SUV</div><div class="cm">Model Y 2026</div><div class="cp">~R$ 320.000 – R$ 420.000<small>importado · SUV mais vendido do mundo 2023</small></div><div class="br"><span class="bl">Auto.</span><div class="bb"><div class="bf" style="width:87%;background:linear-gradient(90deg,var(--red),rgba(255,77,77,.2))"></div></div><span class="bk c">~530 km</span></div><div class="sp"><div class="sv"><div class="sl2">Bateria</div><div class="sv2">60–82 kWh NMC</div></div><div class="sv"><div class="sl2">Supercharger</div><div class="sv2 c">250 kW DC</div></div><div class="sv"><div class="sl2">Potência</div><div class="sv2 c">299–534 cv</div></div><div class="sv"><div class="sl2">0–100</div><div class="sv2 c">3,5 s (P)</div></div></div><div class="ft"><span><span class="dot dg"></span>250 kW Supercharger</span><span class="vs">vs. Equinox EV · EX40</span></div></div>
+</div>
+<div class="note"><strong>Tesla no Brasil:</strong> Sem operação oficial consolidada. Veículos são importados via traders e importadoras independentes. A rede Supercharger existe em algumas cidades, mas não há suporte oficial de concessionária. Os preços variam muito por configuração e câmbio.</div>
+</div>
+</div>
+
+<!-- ═══════════════ LANÇAMENTOS ═══════════════ -->
+<div id="pg-lancamentos" class="page">
+<div class="ph"><div class="eyebrow">Em breve</div><h2>Lançamentos 2026–2027</h2><p>Confirmados · flagrados em testes · ou com início de vendas recente · abr/2026</p></div>
+<div class="lgrid">
+  <div class="lc"><div class="lt"><div><div class="lbr">BYD · ACABOU DE CHEGAR</div><div class="lmo">Dolphin SE 2027</div></div><div class="lw">06/04/2026</div></div><div class="lp">R$ 159.990<small>lançado ontem · 177 cv · 80 kW DC · 405 km</small></div><div class="lsp"><div class="ls"><div class="lsl">Bateria</div><div class="lsv">45,12 kWh</div></div><div class="ls"><div class="lsl">Carga DC</div><div class="lsv">80 kW · 20 min</div></div><div class="ls"><div class="lsl">Potência</div><div class="lsv">177 cv</div></div><div class="ls"><div class="lsl">Auto.</div><div class="lsv">405 km</div></div></div></div>
+
+  <div class="lc"><div class="lt"><div><div class="lbr">BYD · ACABOU DE CHEGAR</div><div class="lmo">Yuan Plus AWD 2027</div></div><div class="lw">06/04/2026</div></div><div class="lp">R$ 269.990<small>lançado ontem · 449 cv · AWD · 800V · 20 min</small></div><div class="lsp"><div class="ls"><div class="lsl">Bateria</div><div class="lsv">74,88 kWh</div></div><div class="ls"><div class="lsl">Carga DC</div><div class="lsv">800V · 20 min</div></div><div class="ls"><div class="lsl">Potência</div><div class="lsv">449 cv AWD</div></div><div class="ls"><div class="lsl">0–100</div><div class="lsv">3,9 s</div></div></div></div>
+
+  <div class="lc"><div class="lt"><div><div class="lbr">Geely</div><div class="lmo">EX2 · Produção Nacional</div></div><div class="lw">2026</div></div><div class="lp">Abaixo R$123.800 atual<small>fábrica Renault-Geely em Curitiba/PR · preço ↓ · fila ↓</small></div><div class="lsp"><div class="ls"><div class="lsl">Bateria</div><div class="lsv">39,4 kWh LFP</div></div><div class="ls"><div class="lsl">Carga DC</div><div class="lsv">70 kW · 21 min</div></div><div class="ls"><div class="lsl">Impacto</div><div class="lsv">Ameaça BYD</div></div><div class="ls"><div class="lsl">Prod.</div><div class="lsv">Curitiba/PR</div></div></div></div>
+
+  <div class="lc"><div class="lt"><div><div class="lbr">GWM</div><div class="lmo">ORA 05</div></div><div class="lw">2º Sem. 2026</div></div><div class="lp">~R$ 200.000 – R$ 220.000<small>flagrado em testes no BR · SUV médio</small></div><div class="lsp"><div class="ls"><div class="lsl">Bateria</div><div class="lsv">45–58 kWh</div></div><div class="ls"><div class="lsl">Auto.</div><div class="lsv">480–580 km CLTC</div></div><div class="ls"><div class="lsl">Potência</div><div class="lsv">204 cv</div></div><div class="ls"><div class="lsl">Tipo</div><div class="lsv">SUV médio</div></div></div></div>
+
+  <div class="lc"><div class="lt"><div><div class="lbr">Leapmotor · Stellantis</div><div class="lmo">C10 / B10</div></div><div class="lw">2026</div></div><div class="lp">R$ 120.000 – R$ 220.000<small>início vendas · 44–60 un. mar/26 · parceria Stellantis</small></div><div class="lsp"><div class="ls"><div class="lsl">B10</div><div class="lsv">Hatch ~R$130k</div></div><div class="ls"><div class="lsl">C10</div><div class="lsv">SUV ~R$200k</div></div><div class="ls"><div class="lsl">Carga DC</div><div class="lsv">DC disponível</div></div><div class="ls"><div class="lsl">Parceiro</div><div class="lsv">Stellantis BR</div></div></div></div>
+
+  <div class="lc"><div class="lt"><div><div class="lbr">BYD · Atualização</div><div class="lmo">Dolphin Mini · Nova Geração</div></div><div class="lw">2026–27</div></div><div class="lp">~R$125.000+<small>reação ao EX2 nacional · mais auto. e potência</small></div><div class="lsp"><div class="ls"><div class="lsl">Auto. prevista</div><div class="lsv">340–360 km</div></div><div class="ls"><div class="lsl">Novidade</div><div class="lsv">LiDAR God's Eye</div></div><div class="ls"><div class="lsl">Motivo</div><div class="lsv">Resposta Geely</div></div><div class="ls"><div class="lsl">Status</div><div class="lsv">Em develop.</div></div></div></div>
+
+  <div class="lc"><div class="lt"><div><div class="lbr">BMW · Neue Klasse</div><div class="lmo">iX3 2026</div></div><div class="lw">2026</div></div><div class="lp">~R$ 500.000+<small>800V · 400 kW DC · homologação final BR</small></div><div class="lsp"><div class="ls"><div class="lsl">Auto.</div><div class="lsv">805 km WLTP</div></div><div class="ls"><div class="lsl">Carga DC</div><div class="lsv">400 kW DC</div></div><div class="ls"><div class="lsl">Plataforma</div><div class="lsv">Neue Klasse</div></div><div class="ls"><div class="lsl">Status</div><div class="lsv">Homologação</div></div></div></div>
+
+  <div class="lc"><div class="lt"><div><div class="lbr">Chevrolet</div><div class="lmo">Captiva EV</div></div><div class="lw">2026</div></div><div class="lp">~R$ 200.000<small>base Wuling Starlight S · 60 kWh · ~350 km</small></div><div class="lsp"><div class="ls"><div class="lsl">Bateria</div><div class="lsv">60 kWh LFP</div></div><div class="ls"><div class="lsl">Auto.</div><div class="lsv">~350 km</div></div><div class="ls"><div class="lsl">Potência</div><div class="lsv">204 cv</div></div><div class="ls"><div class="lsl">Ameaça</div><div class="lsv">EX5 · Yuan Pro</div></div></div></div>
+
+  <div class="lc"><div class="lt"><div><div class="lbr">Omoda / Chery</div><div class="lmo">Omoda E5</div></div><div class="lw">2026</div></div><div class="lp">~R$ 180.000 – R$ 200.000<small>68 unidades mar/26 · vendas ativas</small></div><div class="lsp"><div class="ls"><div class="lsl">Tipo</div><div class="lsv">SUV Compacto</div></div><div class="ls"><div class="lsl">Status</div><div class="lsv">Vendas ativas</div></div><div class="ls"><div class="lsl">Carga DC</div><div class="lsv">DC disponível</div></div><div class="ls"><div class="lsl">Origem</div><div class="lsv">Chery Group</div></div></div></div>
+</div>
+<div class="note"><strong>Tendência:</strong> 2026 é o ano da nacionalização em massa. BYD (BA), GWM (SP), Chevrolet (CE) e Renault-Geely (PR) produzem ou estão prestes a produzir EVs no Brasil. O mercado deve superar 150.000 EVs em 2026. O iX3 da BMW inaugura uma nova geração (Neue Klasse / 800V / 400 kW DC) que deve redefinir o padrão premium.</div>
+</div>
+
+<!-- ═══════════════ X1 ═══════════════ -->
+<div id="pg-x1" class="page">
+<div class="ph"><div class="eyebrow">Duelo por segmento</div><h2>X1 por Categoria</h2><p>Melhor custo-benefício em cada faixa · dados INMETRO abr/2026</p></div>
+<p class="x1-intro">Vencedor = melhor equilíbrio entre preço, autonomia, carga DC e disponibilidade. Vice-campeão = melhor alternativa para quem prioriza um critério diferente.</p>
+
+<div class="x1s">
+  <div class="x1t" style="color:var(--cyan)">⚡ Entrada · até R$130k</div>
+  <div class="x1c">
+    <div class="x1h"><div class="x1hd">Critério</div><div class="x1hd x1hw">🥇 BYD Dolphin Mini 38 kWh</div><div class="x1hd x1hr">🥈 Geely EX2 Pro</div></div>
+    <div class="x1r"><div class="x1l">Preço</div><div class="x1cell x1w"><span>👑</span><div><div class="wn">R$119.990</div><div class="rs g">R$3.810 mais barato</div></div></div><div class="x1cell"><div class="ln2">R$123.800</div></div></div>
+    <div class="x1r"><div class="x1l">Carga DC</div><div class="x1cell"><div class="ln2">40 kW · 22 min</div></div><div class="x1cell x1w"><span>👑</span><div><div class="wn">70 kW · 21 min</div><div class="rs g">+75% mais rápido</div></div></div></div>
+    <div class="x1r"><div class="x1l">Porta-malas</div><div class="x1cell"><div class="ln2">230 L · 3,78m</div></div><div class="x1cell x1w"><span>👑</span><div><div class="wn">375 L + frunk · 4,13m</div><div class="rs g">62% maior</div></div></div></div>
+    <div class="x1r"><div class="x1l">Disponibilidade</div><div class="x1cell x1w"><span>👑</span><div><div class="wn">Nacional · imediata</div><div class="rs g">Camaçari/BA</div></div></div><div class="x1cell"><div class="ln2">Importado · fila 3 meses</div></div></div>
+    <div class="x1r"><div class="x1l">VEREDICTO</div><div class="x1cell x1w"><div><div class="wn">🏆 Compre agora</div><div class="rs">Preço + rede + entrega imediata</div></div></div><div class="x1cell"><div><div class="wn" style="color:var(--cyan)">Superior tecnicamente</div><div class="rs a">Quando tiver estoque</div></div></div></div>
+  </div>
+</div>
+
+<div class="x1s">
+  <div class="x1t" style="color:var(--green)">🚗 Compactos · R$130k–R$200k</div>
+  <div class="x1c">
+    <div class="x1h"><div class="x1hd">Critério</div><div class="x1hd x1hw">🥇 BYD Dolphin GS</div><div class="x1hd x1hr">🥈 Chevrolet Spark EUV</div></div>
+    <div class="x1r"><div class="x1l">Preço</div><div class="x1cell x1w"><span>👑</span><div><div class="wn">R$149.990</div><div class="rs g">R$5k mais barato</div></div></div><div class="x1cell"><div class="ln2">R$154.990</div></div></div>
+    <div class="x1r"><div class="x1l">Autonomia</div><div class="x1cell x1w"><span>👑</span><div><div class="wn">291 km · 44,9 kWh</div><div class="rs g">+33 km · bateria maior</div></div></div><div class="x1cell"><div class="ln2">258 km · 42 kWh</div></div></div>
+    <div class="x1r"><div class="x1l">ADAS / Segurança</div><div class="x1cell"><div class="ln2">Básico</div></div><div class="x1cell x1w"><span>👑</span><div><div class="wn">Completo de série</div><div class="rs g">ACC · câm. 360° · frean. autôn.</div></div></div></div>
+    <div class="x1r"><div class="x1l">Garantia</div><div class="x1cell x1w"><span>👑</span><div><div class="wn">6 anos sem limite km</div></div></div><div class="x1cell"><div class="ln2">5 anos</div></div></div>
+    <div class="x1r"><div class="x1l">VEREDICTO</div><div class="x1cell x1w"><div><div class="wn">🏆 Melhor custo-benefício</div><div class="rs">Mais barato + mais auto. + garantia</div></div></div><div class="x1cell"><div><div class="wn" style="color:var(--cyan)">Melhor em ADAS</div><div class="rs a">Segurança ativa completa de série</div></div></div></div>
+  </div>
+</div>
+
+<div class="x1s">
+  <div class="x1t" style="color:var(--green)">✨ SUV Médio · R$180k–R$250k</div>
+  <div class="x1c">
+    <div class="x1h"><div class="x1hd">Critério</div><div class="x1hd x1hw">🥇 Geely EX5 Pro</div><div class="x1hd x1hr">🥈 BYD Yuan Plus AWD</div></div>
+    <div class="x1r"><div class="x1l">Preço</div><div class="x1cell x1w"><span>👑</span><div><div class="wn">R$195.800</div><div class="rs g">R$74k mais barato</div></div></div><div class="x1cell"><div class="ln2">R$269.990</div></div></div>
+    <div class="x1r"><div class="x1l">Autonomia INMETRO</div><div class="x1cell x1w"><span>👑</span><div><div class="wn">413 km</div><div class="rs g">Melhor da faixa</div></div></div><div class="x1cell"><div class="ln2">530 km (China)</div></div></div>
+    <div class="x1r"><div class="x1l">Performance</div><div class="x1cell"><div class="ln2">218 cv FWD</div></div><div class="x1cell x1w"><span>👑</span><div><div class="wn">449 cv AWD · 3,9 s</div><div class="rs g">Superesportivo</div></div></div></div>
+    <div class="x1r"><div class="x1l">Carga DC</div><div class="x1cell x1w"><span>👑</span><div><div class="wn">20 min 30→80%</div></div></div><div class="x1cell"><div class="ln2">800V · 20 min</div></div></div>
+    <div class="x1r"><div class="x1l">VEREDICTO</div><div class="x1cell x1w"><div><div class="wn">🏆 Melhor preço/autonomia</div><div class="rs">413 km INMETRO + preço racional</div></div></div><div class="x1cell"><div><div class="wn" style="color:var(--cyan)">Melhor performance</div><div class="rs a">449 cv · AWD · superesportivo</div></div></div></div>
+  </div>
+</div>
+
+<div class="x1s">
+  <div class="x1t" style="color:var(--amber)">💎 Premium · R$220k–R$400k</div>
+  <div class="x1c">
+    <div class="x1h"><div class="x1hd">Critério</div><div class="x1hd x1hw">🥇 Volvo EX30 Twin</div><div class="x1hd x1hr">🥈 Chevrolet Equinox EV RS</div></div>
+    <div class="x1r"><div class="x1l">Preço</div><div class="x1cell x1w"><span>👑</span><div><div class="wn">R$249.950</div><div class="rs g">R$100k mais barato</div></div></div><div class="x1cell"><div class="ln2">R$349.990</div></div></div>
+    <div class="x1r"><div class="x1l">Carga DC</div><div class="x1cell x1w"><span>👑</span><div><div class="wn">153 kW · 26 min</div><div class="rs g">Quase o dobro mais rápido</div></div></div><div class="x1cell"><div class="ln2">150 kW · 48 min</div></div></div>
+    <div class="x1r"><div class="x1l">Autonomia INMETRO</div><div class="x1cell"><div class="ln2">338 km</div></div><div class="x1cell x1w"><span>👑</span><div><div class="wn">443 km</div><div class="rs g">+105 km na faixa</div></div></div></div>
+    <div class="x1r"><div class="x1l">Marca premium</div><div class="x1cell x1w"><span>👑</span><div><div class="wn">Volvo · ref. segurança</div></div></div><div class="x1cell"><div class="ln2">Chevrolet</div></div></div>
+    <div class="x1r"><div class="x1l">VEREDICTO</div><div class="x1cell x1w"><div><div class="wn">🏆 Melhor custo-benefício premium</div><div class="rs">R$100k menos · carga 2x mais rápida</div></div></div><div class="x1cell"><div><div class="wn" style="color:var(--cyan)">Melhor autonomia da faixa</div><div class="rs a">443 km INMETRO imbatível</div></div></div></div>
+  </div>
+</div>
+
+<div class="x1s">
+  <div class="x1t" style="color:var(--red)">🔴 Alto Luxo · R$400k+</div>
+  <div class="x1c">
+    <div class="x1h"><div class="x1hd">Critério</div><div class="x1hd x1hw">🥇 Chevrolet Blazer EV RS</div><div class="x1hd x1hr">🥈 Porsche Macan Electric</div></div>
+    <div class="x1r"><div class="x1l">Preço</div><div class="x1cell x1w"><span>👑</span><div><div class="wn">R$503.190</div><div class="rs g">~R$37k mais barato</div></div></div><div class="x1cell"><div class="ln2">R$540.000+</div></div></div>
+    <div class="x1r"><div class="x1l">Autonomia INMETRO</div><div class="x1cell x1w"><span>👑</span><div><div class="wn">481 km 🥇 do Brasil</div></div></div><div class="x1cell"><div class="ln2">~430 km (WLTP)</div></div></div>
+    <div class="x1r"><div class="x1l">Performance</div><div class="x1cell"><div class="ln2">347 cv · ~6 s</div></div><div class="x1cell x1w"><span>👑</span><div><div class="wn">408–639 cv · 3,3 s</div><div class="rs g">DNA Porsche</div></div></div></div>
+    <div class="x1r"><div class="x1l">Carga DC</div><div class="x1cell"><div class="ln2">190 kW</div></div><div class="x1cell x1w"><span>👑</span><div><div class="wn">270 kW · mais rápido BR</div></div></div></div>
+    <div class="x1r"><div class="x1l">VEREDICTO</div><div class="x1cell x1w"><div><div class="wn">🏆 Melhor custo-benefício luxo</div><div class="rs">481 km INMETRO + preço menor</div></div></div><div class="x1cell"><div><div class="wn" style="color:var(--cyan)">Referência performance</div><div class="rs a">270 kW DC · 3,3 s</div></div></div></div>
+  </div>
+</div>
+
+<div class="note"><strong>Metodologia:</strong> Vencedor = melhor equilíbrio real considerando autonomia INMETRO (não WLTP/CLTC), carga DC, disponibilidade de rede e preço de tabela. Vice-campeão = melhor escolha para perfil diferente. Dados abr/2026.</div>
+</div>
+
+<!-- ═══════════════ KANBAN X1 ═══════════════ -->
+<div id="pg-kanban" class="page">
+<div class="ph"><div class="eyebrow">Comparativo visual</div><h2>Kanban X1<br>Cross-Category</h2><p>Os melhores de cada segmento lado a lado · mesmo que categorias diferentes</p></div>
+
+<div class="kb-notice"><strong>Aviso:</strong> Este Kanban compara modelos de categorias diferentes (hatch, SUV, sedã, premium). Os critérios de avaliacao mudam conforme o segmento — use como visao geral para entender o melhor de cada faixa, nao como comparativo direto entre um mini-hatch e um SUV de luxo.</div>
+
+<div class="kb-board">
+  <div class="kb-col">
+    <div class="kb-col-hdr"><span class="kb-dot" style="background:var(--cyan)"></span> Ate R$130k · Entrada</div>
+    <div class="kb-item">
+      <div class="kb-brand">BYD</div>
+      <div class="kb-model">Dolphin Mini 38 kWh</div>
+      <div class="kb-chips"><span class="kb-chip price">R$119.990</span><span class="kb-chip best">280 km</span><span class="kb-chip">40 kW DC</span><span class="kb-chip best">Nacional BA</span></div>
+      <div class="kb-crown">🏆 Melhor compra imediata</div>
+    </div>
+    <div class="kb-item">
+      <div class="kb-brand">Geely</div>
+      <div class="kb-model">EX2 Pro</div>
+      <div class="kb-chips"><span class="kb-chip price">R$123.800</span><span class="kb-chip best">289 km</span><span class="kb-chip best">70 kW DC</span><span class="kb-chip">375L + frunk</span></div>
+      <div class="kb-crown">🥈 Superior tecnico · fila 3 meses</div>
+    </div>
+    <div class="kb-item">
+      <div class="kb-brand">Renault</div>
+      <div class="kb-model">Kwid E-Tech</div>
+      <div class="kb-chips"><span class="kb-chip price">R$99.990</span><span class="kb-chip" style="color:var(--red)">180 km</span><span class="kb-chip" style="color:var(--red)">Sem DC</span><span class="kb-chip best">Nacional PR</span></div>
+      <div class="kb-crown">💰 Mais barato do BR · sem DC</div>
+    </div>
+  </div>
+
+  <div class="kb-col">
+    <div class="kb-col-hdr"><span class="kb-dot" style="background:var(--green)"></span> R$130k–200k · Compactos</div>
+    <div class="kb-item">
+      <div class="kb-brand">BYD</div>
+      <div class="kb-model">Dolphin GS</div>
+      <div class="kb-chips"><span class="kb-chip price">R$149.990</span><span class="kb-chip best">291 km</span><span class="kb-chip">60 kW DC</span><span class="kb-chip best">6a garantia</span></div>
+      <div class="kb-crown">🏆 Melhor custo-beneficio</div>
+    </div>
+    <div class="kb-item">
+      <div class="kb-brand">Chevrolet</div>
+      <div class="kb-model">Spark EUV</div>
+      <div class="kb-chips"><span class="kb-chip price">R$154.990</span><span class="kb-chip">258 km</span><span class="kb-chip">DC 35 min</span><span class="kb-chip best">ADAS completo</span></div>
+      <div class="kb-crown">🥈 Melhor em seguranca ativa</div>
+    </div>
+    <div class="kb-item">
+      <div class="kb-brand">BYD</div>
+      <div class="kb-model">Dolphin SE 2027</div>
+      <div class="kb-chips"><span class="kb-chip price">R$159.990</span><span class="kb-chip best">405 km</span><span class="kb-chip best">80 kW DC</span><span class="kb-chip">177 cv</span></div>
+      <div class="kb-crown">⚡ Recem-lancado · melhor autonomia</div>
+    </div>
+    <div class="kb-item">
+      <div class="kb-brand">GWM ORA</div>
+      <div class="kb-model">ORA 03 Skin</div>
+      <div class="kb-chips"><span class="kb-chip price">R$169.000</span><span class="kb-chip">232 km</span><span class="kb-chip">DC 30 min</span><span class="kb-chip">Design retro</span></div>
+    </div>
+    <div class="kb-item">
+      <div class="kb-brand">GAC Aion</div>
+      <div class="kb-model">Aion Y</div>
+      <div class="kb-chips"><span class="kb-chip price">~R$175.000</span><span class="kb-chip">~260 km</span><span class="kb-chip">DC</span><span class="kb-chip" style="color:var(--red)">Importado</span></div>
+    </div>
+    <div class="kb-item">
+      <div class="kb-brand">BYD</div>
+      <div class="kb-model">Yuan Pro</div>
+      <div class="kb-chips"><span class="kb-chip price">R$182.990</span><span class="kb-chip">250 km</span><span class="kb-chip">DC</span><span class="kb-chip best">SUV Nacional BA</span></div>
+    </div>
+    <div class="kb-item">
+      <div class="kb-brand">BYD</div>
+      <div class="kb-model">Dolphin Plus</div>
+      <div class="kb-chips"><span class="kb-chip price">R$184.800</span><span class="kb-chip best">530 km</span><span class="kb-chip best">80 kW DC</span><span class="kb-chip">204 cv</span></div>
+      <div class="kb-crown">🔋 Maior autonomia da faixa</div>
+    </div>
+    <div class="kb-item">
+      <div class="kb-brand">Geely</div>
+      <div class="kb-model">EX5 Pro</div>
+      <div class="kb-chips"><span class="kb-chip price">R$195.800</span><span class="kb-chip best">413 km INMETRO</span><span class="kb-chip best">20 min DC</span><span class="kb-chip">218 cv</span></div>
+      <div class="kb-crown">🏆 Melhor SUV da faixa</div>
+    </div>
+  </div>
+
+  <div class="kb-col">
+    <div class="kb-col-hdr"><span class="kb-dot" style="background:var(--amber)"></span> R$200k–350k · Premium Acessivel</div>
+    <div class="kb-item">
+      <div class="kb-brand">Volvo</div>
+      <div class="kb-model">EX30 Twin Motor</div>
+      <div class="kb-chips"><span class="kb-chip price">R$249.950</span><span class="kb-chip">338 km</span><span class="kb-chip best">153 kW DC</span><span class="kb-chip best">3,6 s</span></div>
+      <div class="kb-crown">🏆 Melhor custo-beneficio premium</div>
+    </div>
+    <div class="kb-item">
+      <div class="kb-brand">BYD</div>
+      <div class="kb-model">Seal Performance</div>
+      <div class="kb-chips"><span class="kb-chip price">R$249.800</span><span class="kb-chip best">~430 km</span><span class="kb-chip best">150 kW DC</span><span class="kb-chip best">530 cv · 3,8 s</span></div>
+      <div class="kb-crown">⚡ Melhor performance/preco do BR</div>
+    </div>
+    <div class="kb-item">
+      <div class="kb-brand">Zeekr</div>
+      <div class="kb-model">Zeekr X</div>
+      <div class="kb-chips"><span class="kb-chip price">~R$240.000</span><span class="kb-chip">~395 km</span><span class="kb-chip best">150 kW DC</span><span class="kb-chip">315 cv AWD</span></div>
+    </div>
+    <div class="kb-item">
+      <div class="kb-brand">BYD</div>
+      <div class="kb-model">Yuan Plus AWD 2027</div>
+      <div class="kb-chips"><span class="kb-chip price">R$269.990</span><span class="kb-chip best">530 km</span><span class="kb-chip best">800V</span><span class="kb-chip best">449 cv · 3,9 s</span></div>
+      <div class="kb-crown">🚀 Recem-lancado · melhor conjunto</div>
+    </div>
+    <div class="kb-item">
+      <div class="kb-brand">Chevrolet</div>
+      <div class="kb-model">Equinox EV RS</div>
+      <div class="kb-chips"><span class="kb-chip price">R$349.990</span><span class="kb-chip best">443 km INMETRO</span><span class="kb-chip">150 kW DC</span><span class="kb-chip">17,7" Google</span></div>
+      <div class="kb-crown">🥈 Maior autonomia INMETRO da faixa</div>
+    </div>
+  </div>
+
+  <div class="kb-col">
+    <div class="kb-col-hdr"><span class="kb-dot" style="background:var(--violet)"></span> R$350k–550k · Alto Premium</div>
+    <div class="kb-item">
+      <div class="kb-brand">Zeekr</div>
+      <div class="kb-model">Zeekr 7X</div>
+      <div class="kb-chips"><span class="kb-chip price">R$350.000</span><span class="kb-chip best">~550 km</span><span class="kb-chip best">200+ kW DC</span><span class="kb-chip">544 cv</span></div>
+      <div class="kb-crown">🏆 Melhor valor alto premium</div>
+    </div>
+    <div class="kb-item">
+      <div class="kb-brand">BMW</div>
+      <div class="kb-model">iX1 xDrive30</div>
+      <div class="kb-chips"><span class="kb-chip price">R$383.950</span><span class="kb-chip">~438 km</span><span class="kb-chip">130 kW DC</span><span class="kb-chip">313 cv AWD</span></div>
+    </div>
+    <div class="kb-item">
+      <div class="kb-brand">Zeekr</div>
+      <div class="kb-model">Zeekr 001</div>
+      <div class="kb-chips"><span class="kb-chip price">~R$400.000</span><span class="kb-chip best">~750 km</span><span class="kb-chip best">200+ kW DC</span><span class="kb-chip">544 cv</span></div>
+      <div class="kb-crown">🔋 Maior autonomia do BR</div>
+    </div>
+    <div class="kb-item">
+      <div class="kb-brand">BYD</div>
+      <div class="kb-model">Tan 7 Lugares</div>
+      <div class="kb-chips"><span class="kb-chip price">~R$420.000</span><span class="kb-chip">~415 km</span><span class="kb-chip">110 kW DC</span><span class="kb-chip best">7 lugares</span></div>
+    </div>
+    <div class="kb-item">
+      <div class="kb-brand">BMW</div>
+      <div class="kb-model">iX3 Neue Klasse</div>
+      <div class="kb-chips"><span class="kb-chip price">~R$500.000+</span><span class="kb-chip best">805 km WLTP</span><span class="kb-chip best">400 kW DC</span><span class="kb-chip" style="color:var(--violet)">Chegando</span></div>
+      <div class="kb-crown">🚀 Game-changer 2026</div>
+    </div>
+    <div class="kb-item">
+      <div class="kb-brand">Chevrolet</div>
+      <div class="kb-model">Blazer EV RS</div>
+      <div class="kb-chips"><span class="kb-chip price">R$503.190</span><span class="kb-chip best">481 km INMETRO</span><span class="kb-chip">190 kW DC</span><span class="kb-chip">347 cv</span></div>
+      <div class="kb-crown">🥈 Maior auto. INMETRO entre SUVs</div>
+    </div>
+    <div class="kb-item">
+      <div class="kb-brand">Porsche</div>
+      <div class="kb-model">Macan Electric</div>
+      <div class="kb-chips"><span class="kb-chip price">R$540.000+</span><span class="kb-chip">~600 km WLTP</span><span class="kb-chip best">270 kW DC 🥇</span><span class="kb-chip">639 cv</span></div>
+      <div class="kb-crown">⚡ Carga mais rapida do BR</div>
+    </div>
+  </div>
+
+  <div class="kb-col">
+    <div class="kb-col-hdr"><span class="kb-dot" style="background:var(--red)"></span> R$550k+ · Ultra Luxo</div>
+    <div class="kb-item">
+      <div class="kb-brand">BMW</div>
+      <div class="kb-model">i4 M50</div>
+      <div class="kb-chips"><span class="kb-chip price">R$675.950</span><span class="kb-chip">~460 km</span><span class="kb-chip best">210 kW DC</span><span class="kb-chip best">544 cv · 3,9 s</span></div>
+      <div class="kb-crown">🏆 Melhor seda esportivo</div>
+    </div>
+    <div class="kb-item">
+      <div class="kb-brand">Audi</div>
+      <div class="kb-model">Q8 e-tron</div>
+      <div class="kb-chips"><span class="kb-chip price">~R$650.000</span><span class="kb-chip">~400 km</span><span class="kb-chip">170 kW DC</span><span class="kb-chip">408 cv</span></div>
+    </div>
+    <div class="kb-item">
+      <div class="kb-brand">Mercedes</div>
+      <div class="kb-model">EQS 450+</div>
+      <div class="kb-chips"><span class="kb-chip price">~R$850.000</span><span class="kb-chip best">~780 km</span><span class="kb-chip">200 kW DC</span><span class="kb-chip">333 cv</span></div>
+      <div class="kb-crown">🔋 Maior autonomia seda luxo</div>
+    </div>
+    <div class="kb-item">
+      <div class="kb-brand">BMW</div>
+      <div class="kb-model">iX xDrive50</div>
+      <div class="kb-chips"><span class="kb-chip price">~R$800.000</span><span class="kb-chip best">528 km INMETRO 🥇</span><span class="kb-chip">200 kW DC</span><span class="kb-chip">523 cv</span></div>
+      <div class="kb-crown">🥇 Maior autonomia INMETRO do BR</div>
+    </div>
+    <div class="kb-item">
+      <div class="kb-brand">Volvo</div>
+      <div class="kb-model">EX90</div>
+      <div class="kb-chips"><span class="kb-chip price">R$849.950</span><span class="kb-chip">459 km</span><span class="kb-chip best">250 kW DC</span><span class="kb-chip best">LiDAR · 7 lug</span></div>
+      <div class="kb-crown">🛡 Referencia em seguranca</div>
+    </div>
+    <div class="kb-item">
+      <div class="kb-brand">Audi</div>
+      <div class="kb-model">e-tron GT</div>
+      <div class="kb-chips"><span class="kb-chip price">~R$900.000</span><span class="kb-chip">~470 km</span><span class="kb-chip best">270 kW DC</span><span class="kb-chip best">646 cv</span></div>
+      <div class="kb-crown">⚡ Performance maxima</div>
+    </div>
+  </div>
+</div>
+<div class="note"><strong>Metodologia Kanban:</strong> Cada coluna representa uma faixa de preco. Dentro da coluna, os modelos estao ordenados por custo-beneficio. Os selos (🏆🥈🔋⚡🚀) indicam destaque em criterios especificos. <strong>Categorias misturadas intencionalmente</strong> — um hatch de R$185k e um SUV de R$195k competem pelo mesmo orcamento do comprador.</div>
+</div>
+
+<!-- ═══════════════ GUIA EV ═══════════════ -->
+<div id="pg-guia" class="page">
+<div class="ph"><div class="eyebrow">Tudo que voce precisa saber</div><h2>Guia do Comprador<br>de Carro Eletrico</h2><p>Legenda completa para entender specs, comparar modelos e fazer a melhor escolha</p></div>
+
+<div class="guia-grid">
+
+  <div class="guia-card" style="--gc:var(--cyan)">
+    <div class="guia-icon">🔋</div>
+    <div class="guia-title">Bateria (kWh)</div>
+    <div class="guia-body">
+      A bateria e o "tanque" do eletrico. <strong>kWh = capacidade de energia armazenada.</strong> Maior kWh = mais autonomia, mas tambem mais peso e preco.<br><br>
+      <span class="bad">20–35 kWh</span> — urbano, viagens curtas<br>
+      <span class="warn">40–60 kWh</span> — dia a dia + viagens ocasionais<br>
+      <span class="val">65–85 kWh</span> — confortavel para viagens longas<br>
+      <span class="val">100+ kWh</span> — autonomia maxima, sem ansiedade
+    </div>
+    <div class="guia-tip"><strong>Dica:</strong> LFP (litio-ferro-fosfato) e mais barata, segura e duravel. NMC (niquel-manganes-cobalto) tem mais densidade = mais km por kg. A maioria dos chineses usa LFP. Europeus preferem NMC.</div>
+  </div>
+
+  <div class="guia-card" style="--gc:var(--green)">
+    <div class="guia-icon">📏</div>
+    <div class="guia-title">Autonomia (km)</div>
+    <div class="guia-body">
+      Quantos km voce roda com carga cheia. <strong>Existem 3 ciclos de medicao:</strong><br><br>
+      <strong>INMETRO</strong> — ciclo brasileiro, o mais realista para nossas condicoes<br>
+      <strong>WLTP</strong> — ciclo europeu, ~15-25% mais otimista que INMETRO<br>
+      <strong>CLTC</strong> — ciclo chines, ~20-30% mais otimista que INMETRO<br><br>
+      <span class="bad">&lt;200 km</span> — so cidade, nao viaja<br>
+      <span class="warn">200–300 km</span> — cidade + viagens curtas com planejamento<br>
+      <span class="val">300–450 km</span> — confortavel para maioria dos usos<br>
+      <span class="val">450+ km</span> — sem ansiedade de autonomia
+    </div>
+    <div class="guia-tip"><strong>Dica:</strong> Sempre compare pelo INMETRO. Se o fabricante so informa WLTP/CLTC, desconte 20-30%. Ar-condicionado, subida e velocidade alta reduzem autonomia real.</div>
+  </div>
+
+  <div class="guia-card" style="--gc:var(--amber)">
+    <div class="guia-icon">⚡</div>
+    <div class="guia-title">Carga DC (kW)</div>
+    <div class="guia-body">
+      Velocidade de recarga rapida em eletropostos. <strong>Maior kW = menos tempo parado.</strong> DC = corrente continua (postos rapidos). AC = corrente alternada (tomada/wallbox).<br><br>
+      <span class="bad">Sem DC / so AC</span> — depende de tomada, horas para carregar<br>
+      <span class="bad">30–50 kW DC</span> — basico, ~45-60 min para 80%<br>
+      <span class="warn">60–100 kW DC</span> — bom, ~25-35 min para 80%<br>
+      <span class="val">100–200 kW DC</span> — rapido, ~18-25 min para 80%<br>
+      <span class="val">200+ kW DC</span> — ultrarapido, ~15-20 min para 80%
+    </div>
+    <div class="guia-tip"><strong>Dica:</strong> O tempo "30→80%" e o mais util — de 80% a 100% a carga desacelera muito (protecao da bateria). Para viagem, carregue ate 80% e siga. Wallbox em casa (7 kW AC) resolve 90% do dia a dia.</div>
+  </div>
+
+  <div class="guia-card" style="--gc:var(--violet)">
+    <div class="guia-icon">🔌</div>
+    <div class="guia-title">Tipos de Recarga</div>
+    <div class="guia-body">
+      <strong>Nivel 1 — Tomada comum (1,4 kW):</strong> ~24h para carga completa. Emergencia apenas.<br><br>
+      <strong>Nivel 2 — Wallbox (7–22 kW AC):</strong> 3–8h. Ideal para casa/trabalho. Custo ~R$2.000–5.000 instalado.<br><br>
+      <strong>Nivel 3 — DC Rapido (30–400 kW):</strong> 15–50 min. Eletropostos publicos. Paga por kWh consumido (~R$1,50–2,50/kWh).<br><br>
+      <strong>Supercharger Tesla (250 kW):</strong> Rede propria da Tesla, aberta a outros em alguns locais.
+    </div>
+    <div class="guia-tip"><strong>Dica:</strong> 90% dos donos de EV carregam em casa a noite. Wallbox + tarifa noturna = custo de ~R$0,07/km vs. ~R$0,45/km gasolina. Eletroposto DC e para viagem e emergencia.</div>
+  </div>
+
+  <div class="guia-card" style="--gc:var(--cyan)">
+    <div class="guia-icon">🏎</div>
+    <div class="guia-title">Potencia (cv) e 0–100 km/h</div>
+    <div class="guia-body">
+      Eletricos tem torque instantaneo — a aceleracao e imediata. <strong>Mesmo modelos "fracos" parecem rapidos no dia a dia.</strong><br><br>
+      <span class="bad">65–100 cv</span> — cidade tranquilo, sem pressa<br>
+      <span class="warn">100–200 cv</span> — agil, ultrapassa bem<br>
+      <span class="val">200–350 cv</span> — esportivo, muito rapido<br>
+      <span class="val">350+ cv</span> — superesportivo, 0-100 em &lt;5s<br><br>
+      <strong>FWD</strong> = tracao dianteira · <strong>RWD</strong> = traseira · <strong>AWD</strong> = integral (2 motores)
+    </div>
+    <div class="guia-tip"><strong>Dica:</strong> AWD = 2 motores = mais potencia, mas consome mais bateria. Para cidade e estrada, FWD/RWD basta. AWD vale para performance ou estradas ruins.</div>
+  </div>
+
+  <div class="guia-card" style="--gc:var(--green)">
+    <div class="guia-icon">🏭</div>
+    <div class="guia-title">Nacional vs. Importado</div>
+    <div class="guia-body">
+      Fabricas no Brasil = preco menor + entrega imediata + pecas mais faceis.<br><br>
+      <strong>Fabricas ativas 2026:</strong><br>
+      <span class="val">BYD</span> — Camacari/BA (Dolphin Mini, GS, Plus, Yuan, Seal)<br>
+      <span class="val">GWM</span> — Iracemapolis/SP (ORA 03)<br>
+      <span class="val">Chevrolet</span> — Horizonte/CE (Spark EUV)<br>
+      <span class="val">Renault</span> — Curitiba/PR (Kwid E-Tech)<br>
+      <span class="warn">Renault-Geely</span> — Curitiba/PR (EX2 · chegando 2026)<br><br>
+      <span class="bad">Importados</span> = imposto maior, fila, pecas demoradas
+    </div>
+    <div class="guia-tip"><strong>Dica:</strong> Nacional paga menos imposto (ICMS reduzido em muitos estados). PCD e CNPJ tem descontos adicionais. Sempre pergunte sobre incentivos.</div>
+  </div>
+
+  <div class="guia-card" style="--gc:var(--amber)">
+    <div class="guia-icon">💰</div>
+    <div class="guia-title">Custo Total de Propriedade</div>
+    <div class="guia-body">
+      EV parece caro, mas o custo mensal e muito menor:<br><br>
+      <strong>Energia:</strong> ~R$0,07/km (wallbox noturna) vs. R$0,45/km gasolina<br>
+      <strong>Manutencao:</strong> ~60% mais barata (sem oleo, filtros, correia, escapamento)<br>
+      <strong>IPVA:</strong> isento ou reduzido em SP, RJ, MG, PE, MA, PI, CE, RN, RS, MS<br>
+      <strong>Seguro:</strong> ~10-20% mais caro que combustao equivalente<br>
+      <strong>Desvalorizacao:</strong> rapida nos primeiros anos (mercado ainda amadurecendo)<br><br>
+      <span class="val">Economia tipica: R$500–1.500/mes</span> vs. combustao equivalente
+    </div>
+    <div class="guia-tip"><strong>Dica:</strong> Calcule assim: (km/mes ÷ autonomia) × custo da carga. Ex: 1.500 km/mes ÷ 280 km = ~5,4 cargas × ~R$40 (wallbox) = <strong>R$216/mes de energia</strong>. O mesmo carro a gasolina gastaria ~R$675/mes.</div>
+  </div>
+
+  <div class="guia-card" style="--gc:var(--violet)">
+    <div class="guia-icon">🛡</div>
+    <div class="guia-title">Garantia e Bateria</div>
+    <div class="guia-body">
+      A bateria e o componente mais caro. Todas as marcas dao garantia separada:<br><br>
+      <strong>BYD:</strong> <span class="val">6 anos veiculo · 8 anos bateria sem limite de km</span><br>
+      <strong>Geely:</strong> 5 anos · 8 anos bateria<br>
+      <strong>Chevrolet:</strong> 5 anos · 8 anos bateria<br>
+      <strong>Volvo:</strong> 5 anos · 8 anos bateria<br>
+      <strong>BMW:</strong> 3 anos · 8 anos bateria<br>
+      <strong>Tesla:</strong> 4 anos · 8 anos bateria<br><br>
+      Baterias LFP duram <span class="val">3.000+ ciclos</span> (~800.000 km). NMC dura ~1.500 ciclos.
+    </div>
+    <div class="guia-tip"><strong>Dica:</strong> Degradacao normal e ~2-3% ao ano. Apos 8 anos, espere ~80-85% da capacidade original. Evite carregar a 100% diariamente (80% no dia a dia preserva a bateria).</div>
+  </div>
+
+  <div class="guia-card" style="--gc:var(--cyan)">
+    <div class="guia-icon">🏷</div>
+    <div class="guia-title">Badges deste Portal</div>
+    <div class="guia-body">
+      Entenda os selos usados nos cards:<br><br>
+      <span style="background:var(--green);color:#000;padding:1px 6px;border-radius:3px;font-size:.6rem;font-weight:700">NOVO 2027</span> — modelo recem-lancado ou versao nova<br><br>
+      <span style="background:var(--amber);color:#000;padding:1px 6px;border-radius:3px;font-size:.6rem;font-weight:700">Mais Vendido</span> — lider de vendas na categoria<br><br>
+      <span style="background:var(--violet);color:#fff;padding:1px 6px;border-radius:3px;font-size:.6rem;font-weight:700">Chegando 2026</span> — confirmado mas ainda nao a venda<br><br>
+      <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 4px var(--green);vertical-align:middle"></span> <strong>Verde</strong> = DC disponivel / bom<br>
+      <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--amber);vertical-align:middle"></span> <strong>Amarelo</strong> = atencao / limitado<br>
+      <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--red);vertical-align:middle"></span> <strong>Vermelho</strong> = sem DC / ruim
+    </div>
+    <div class="guia-tip"><strong>Cores dos cards:</strong> Ciano = entrada/popular · Verde = intermediario · Amber = premium · Violeta = lancamento/PHEV · Vermelho = topo/performance · Azul = marcas novas</div>
+  </div>
+
+  <div class="guia-card" style="--gc:var(--green)">
+    <div class="guia-icon">📊</div>
+    <div class="guia-title">Barra de Autonomia</div>
+    <div class="guia-body">
+      A barra horizontal em cada card mostra a autonomia relativa ao maximo do mercado BR (~800 km WLTP / ~530 km INMETRO).<br><br>
+      <div class="guia-scale">
+        <span style="background:var(--red)"></span>
+        <span style="background:var(--red)"></span>
+        <span style="background:var(--amber)"></span>
+        <span style="background:var(--amber)"></span>
+        <span style="background:var(--amber)"></span>
+        <span style="background:var(--green)"></span>
+        <span style="background:var(--green)"></span>
+        <span style="background:var(--green)"></span>
+        <span style="background:var(--cyan)"></span>
+        <span style="background:var(--cyan)"></span>
+      </div>
+      <div class="guia-legend">
+        <i><span class="bad">0–30%</span> &lt;200 km</i>
+        <i><span class="warn">30–60%</span> 200–350 km</i>
+        <i><span class="val">60–85%</span> 350–500 km</i>
+        <i style="color:var(--cyan)">85%+ &gt;500 km</i>
+      </div>
+    </div>
+    <div class="guia-tip"><strong>Dica:</strong> Cores do valor ao lado da barra: <span class="val">verde</span> = acima da media, <span class="warn">amarelo</span> = na media, <span class="bad">vermelho</span> = abaixo. Ciano = excepcional.</div>
+  </div>
+
+  <div class="guia-card" style="--gc:var(--amber)">
+    <div class="guia-icon">🗺</div>
+    <div class="guia-title">Planejando uma Viagem</div>
+    <div class="guia-body">
+      <strong>Regra de ouro:</strong> autonomia real de estrada = ~70-80% do INMETRO (velocidade, AC, subida).<br><br>
+      <strong>1.</strong> Calcule: autonomia INMETRO × 0,75 = alcance real<br>
+      <strong>2.</strong> Planeje paradas a cada 70% do alcance real<br>
+      <strong>3.</strong> Use apps: <span class="val">ABVE</span>, <span class="val">PlugShare</span>, <span class="val">Shell Recharge</span><br>
+      <strong>4.</strong> Carregue ate 80% e siga — os ultimos 20% demoram muito<br><br>
+      <strong>Ex:</strong> Dolphin Mini 280 km INMETRO → ~210 km estrada → parada a cada ~150 km
+    </div>
+    <div class="guia-tip"><strong>Rede BR 2026:</strong> ~4.000 pontos de recarga (AC+DC). Principais: Shell Recharge, Zletric, Tupinamba, EZVolt, Tesla Supercharger. Rodovias SP-RJ-MG bem cobertas. Norte/Nordeste ainda em expansao.</div>
+  </div>
+
+  <div class="guia-card" style="--gc:var(--red)">
+    <div class="guia-icon">⚠️</div>
+    <div class="guia-title">Erros Comuns ao Escolher</div>
+    <div class="guia-body">
+      <strong>1. Comparar CLTC/WLTP com INMETRO</strong> — ciclos diferentes, numeros incompativeis<br><br>
+      <strong>2. Ignorar carga DC</strong> — sem DC, viagem longa e inviavel<br><br>
+      <strong>3. Comprar bateria maior que precisa</strong> — se roda 40 km/dia, 250 km basta<br><br>
+      <strong>4. Esquecer da infraestrutura</strong> — tem wallbox em casa? Eletroposto no caminho?<br><br>
+      <strong>5. Nao considerar o custo total</strong> — EV mais caro na compra, mais barato por mes<br><br>
+      <strong>6. Importado sem assistencia</strong> — pecas e garantia podem ser um problema
+    </div>
+    <div class="guia-tip"><strong>Resumo:</strong> O melhor EV e o que cabe no orcamento, atende sua autonomia diaria, tem DC para viagens e assistencia tecnica acessivel na sua regiao.</div>
+  </div>
+
+</div>
+<div class="note"><strong>Este guia</strong> e atualizado conforme o mercado evolui. Dados de abril/2026. Fontes: ABVE, INMETRO, sites oficiais das marcas. Para duvidas especificas, consulte a concessionaria da marca.</div>
+</div>
+
+<script>
+function sp(id,tab){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('pg-'+id).classList.add('active');
+  tab.classList.add('active');
+}
+</script>
+</body>
+</html>
